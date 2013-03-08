@@ -5,13 +5,14 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'matchit.zip'
-Bundle 'The-NERD-Commenter'
-Bundle 'The-NERD-tree'
-Bundle 'vim-powerline'
-Bundle 'Command-T'
-Bundle 'molokai'
+Bundle 'tomasr/molokai'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'vim-scripts/The-NERD-Commenter'
+Bundle 'vim-scripts/The-NERD-tree'
+Bundle 'vim-scripts/Command-T'
 
 """""""""""""""""""" GLOBAL
 let mapleader=","
@@ -45,7 +46,7 @@ set ttyfast
 set mouse=
 set nocompatible
 set backup
-set backupdir=~/.vim_backup
+set backupdir=~/.vim/backup
 set noswapfile
 set fileformats=unix,dos,mac
 set laststatus=2
@@ -127,3 +128,8 @@ function! ToggleFocusMode()
   endif
 endfunc
 nnoremap <F1> :call ToggleFocusMode()<cr>
+
+""" Jedi disable auto completion popup
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_function_definition = "0"
+
