@@ -10,6 +10,8 @@ Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'vim-powerline'
 Bundle 'Command-T'
+Bundle 'molokai'
+Bundle 'davidhalter/jedi-vim'
 
 """""""""""""""""""" GLOBAL
 let mapleader=","
@@ -22,7 +24,7 @@ filetype plugin indent on
 set encoding=utf-8
 set hidden
 set showcmd
-set nowrap
+"set nowrap
 set backspace=indent,eol,start
 set autoindent
 set copyindent
@@ -35,10 +37,10 @@ set incsearch
 set history=1000
 set undolevels=1000
 set title
-set visualbell
+"set visualbell
 set noerrorbells
 set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set listchars=tab:→·,trail:·,extends:→,precedes:→,nbsp:␣
 set ttyfast
 set mouse=
 set nocompatible
@@ -48,10 +50,11 @@ set noswapfile
 set fileformats=unix,dos,mac
 set laststatus=2
 set expandtab
-set softtabstop=2 tabstop=2 shiftwidth=2
+set softtabstop=4 tabstop=4 shiftwidth=4
 set ruler
 set wildignore=*.swp,*.bak
 set wildmode=longest,list
+set t_Co=256 "Force 256 colors
 
 """""""""""""""""""" KEYBINDINGS
 
@@ -59,16 +62,19 @@ map cc <leader>c<space>
 map  # {v}! par 72<CR>
 map  & {v}! par 72j<CR>
 map  <F6> :setlocal spell! spelllang=en<CR>
+map  <F7> <Esc>iimport pdb;pdb.set_trace()<CR><Esc>
 map  <F12> :set invhls<CR>
+map  <S-Enter> O<Esc>
 cmap <C-g> <C-u><ESC>
 command! -bang W w<bang>
 
 """""""""""""""""""" PLUGINS
 
-"let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'fancy'
 let g:CommandTMaxFiles=5000
 let g:CommandTMaxHeight=12
 map <C-o> :CommandT<CR>
+map t :CommandT<CR>
 let g:CommandTAcceptSelectionMap = '<CR>'
 let g:CommandTCancelMap = '<C-g>'
 
@@ -88,6 +94,8 @@ au BufRead,BufNewFile *.xul setfiletype xml
 au filetype html,xml set listchars-=tab:>.
 
 """""""""""""""""""" CUSTOM FUNCTIONS
+
+:command -nargs=+ Find vimgrep <args>|cw
 
 """ Toggle relative/absolute numbering
 function! NumberToggle()
