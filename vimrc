@@ -57,6 +57,8 @@ set wildignore=*.swp,*.bak
 set wildmode=longest,list
 set t_Co=256 "Force 256 colors
 
+set colorcolumn=80
+
 """""""""""""""""""" KEYBINDINGS
 
 map cc <leader>c<space>
