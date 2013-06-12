@@ -94,6 +94,7 @@ au BufRead mutt-*        set invhls
 au BufNewFile *.html 0r ~/.vim/templates/html.txt
 au BufRead,BufNewFile *.jsm setfiletype javascript
 au BufRead,BufNewFile *.xul setfiletype xml
+au BufRead,BufNewFile *.launch setfiletype xml
 au filetype html,xml set listchars-=tab:>.
 
 """""""""""""""""""" CUSTOM FUNCTIONS
