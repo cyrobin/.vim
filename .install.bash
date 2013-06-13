@@ -24,8 +24,4 @@ cd ~/.fonts
 echo "Patch DejaVu in ~/.fonts you migh need to install 'ttf-dejavu-core'."
 ~/.vim/bundle/vim-powerline/fontpatcher/fontpatcher /usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf
 
-echo "Install Command-T. You might need to install 'ruby-dev vim-nox' for Ruby support."
-cd ~/.vim/bundle/Command-T/ruby/command-t/
-ruby extconf.rb
-make
 echo "Done."

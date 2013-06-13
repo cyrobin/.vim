@@ -12,7 +12,6 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/The-NERD-Commenter'
 Bundle 'vim-scripts/The-NERD-tree'
-"Bundle 'vim-scripts/Command-T'
 
 """""""""""""""""""" GLOBAL
 let mapleader=","                           " define new leader key
@@ -186,13 +185,6 @@ map  <F10> <Esc>import pdb;pdb.set_trace()<CR><Esc>
 """""""""""""""""""" PLUGINS
 
 let g:Powerline_symbols = 'fancy'
-
-"let g:CommandTMaxFiles=5000
-"let g:CommandTMaxHeight=12
-"map <C-o> :CommandT<CR>
-"map t :CommandT<CR>
-"let g:CommandTAcceptSelectionMap = '<CR>'
-"let g:CommandTCancelMap = '<C-g>'
 
 " Map for NerdCommenter
 map cc <leader>c<space>
