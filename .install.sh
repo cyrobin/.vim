@@ -1,23 +1,37 @@
-#!/bin/bash
+#!/bin/sh
 
-# we suppose you already cloned ~/.vim
-[[ ! -e ~/.vim/bundle/vundle ]] && git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+# We suppose you have already cloned ~/.vim
 
-[[ -f ~/.vimrc ]] && mv ~/.vimrc ~/.vimrc.$(date +%s).bak
+# Get the vundle plugin -- required by the other plugins
+if [ ! -e ~/.vim/bundle/vundle ] 
+then 
+    git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+fi
+
+# Create a backup of the old vimrc if needed. Link the new vimrc
+if [ -f ~/.vimrc ]
+    then mv ~/.vimrc ~/.vimrc.$(date +%s).bak
+fi
 echo "source ~/.vim/vimrc" > ~/.vimrc
 
-mkdir -p ~/.vim/spell # install dict
-[[ -z "$(ls ~/.vim/spell/)" ]] && wget -q --directory-prefix=$HOME/.vim/spell/ \
+# Install dictionnaries
+mkdir -p ~/.vim/spell
+if [ -z "$(ls ~/.vim/spell/)" ]
+then wget -q --directory-prefix=$HOME/.vim/spell/ \
     http://ftp.vim.org/vim/runtime/spell/fr.utf-8.spl \
     http://ftp.vim.org/vim/runtime/spell/fr.utf-8.sug \
     http://ftp.vim.org/vim/runtime/spell/en.utf-8.spl \
     http://ftp.vim.org/vim/runtime/spell/en.utf-8.sug
+fi
 
+# Create the backup directory
 mkdir -p ~/.vim/backup
 
+# Install other plugins (including the molokai colortheme)
 echo "Install bundles w/vundle (warns molokai not found, and will install it)"
 vim +BundleInstall +qall
 
+# Install fonts
 echo "Patch font for Powerline. You might need to install 'python-fontforge'."
 mkdir -p ~/.fonts
 cd ~/.fonts
