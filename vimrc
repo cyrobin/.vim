@@ -78,6 +78,9 @@ set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 " set of file name suffixes that will be given a lower priority when it comes to matching wildcards
 set suffixes+=.old
 
+set shell=zsh                               " use zsh as the default shell for :! cmd
+set shellcmdflag=-ci                        " load zshrc (interactive shell)
+
 
 """""""""""""""""""" KEYBINDINGS
 
