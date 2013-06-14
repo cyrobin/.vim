@@ -219,6 +219,8 @@ au BufRead,BufNewFile *.jsm setfiletype javascript
 au BufRead,BufNewFile *.xul setfiletype xml
 au filetype html,xml set listchars-=tab:>.
 
+au BufRead,BufNewFile *.md  set syntax=rst
+
 ""filetype plugin indent on "Detection to determine the type of the current file
 "
 "au BufRead *.stl so $VIMRUNTIME/syntax/html.vim
