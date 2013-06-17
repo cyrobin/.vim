@@ -80,7 +80,7 @@ set suffixes+=.old
 
 set shell=zsh                               " use zsh as the default shell for :! cmd
 "set shellcmdflag=-ci                        " load zshrc (interactive shell)
-
+set foldmethod=marker                       " use marker to define folds
 
 """""""""""""""""""" KEYBINDINGS
 
@@ -175,7 +175,7 @@ nmap <leader>tm :tabmove
 nmap <leader>th :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Map Vim 9 to first non-blank character
-map 9 ^
+"map 9 ^
 
 " cd to the directory containing the file in the buffer
 nmap  <leader>cd :lcd %:h
