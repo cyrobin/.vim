@@ -316,6 +316,21 @@ au BufRead,BufNewFile *.ins  set syntax=tex
                         " zo : fold open    open 1 fold under the cursor (zO does it recursively)
                         " zm : fold more    increases foldlevel by 1 (zM opens all folds)
                         " zr : fold reduce  decreses foldlevel by 1 (zR closes all folds
+                        "
+                        "
+
+"Vim has extended vi to allow use of the * register as a reference to the system clipboard. So we can use normal mode commands like: "*dd or 1G"*yG to copy things into the * register and "*p to paste text from it. We can also use this * register with the ex yank command, so :%y * will accomplish the same goal as gg"*yG (copy all text into the system clipboard so it can be pasted into an X or MS Windows application). 
+"
+"    "+2yy – copy two lines to X11 clipboard
+"    "+dd – cut line to X11 clipboard
+"    "+p – paste X11 clipboard 
+"
+"
+" VimTip21 is spot on but the title suggests it's for MS Windows only. It also mentions that we can change out settings so the "anonymous" register is aliased to the * register using:
+
+"           set clipboard=unnamed
+"
+"
 
 """""""""""""""""""" CUSTOM FUNCTIONS
 
