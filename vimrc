@@ -35,7 +35,7 @@ set ignorecase                              " ignore case during search : lower 
 set smartcase                               " but if I put case variation in my search, it's cause I care
 set hlsearch                                " highlight search matches
 set incsearch                               " incremental search (jump to partial match)
-"set shwomatch                              " show matching brackets -- no use with matchit plugin
+"set showmatch                              " show matching brackets -- no use with matchit plugin
 set history=50                              " keep some history
 set undolevels=100                          " keep some memory for undo
 set textwidth=80                            " usual textwidth for wrapping
