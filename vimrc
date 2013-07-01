@@ -221,6 +221,8 @@ au BufRead,BufNewFile *.xul setfiletype xml
 au filetype html,xml set listchars-=tab:>.
 
 au BufRead,BufNewFile *.md  set syntax=rst
+au BufRead,BufNewFile *.ecl  set syntax=prolog
+au BufRead,BufNewFile *.ins  set syntax=tex
 
 ""filetype plugin indent on "Detection to determine the type of the current file
 "
@@ -374,4 +376,5 @@ nnoremap <leader>cws :call DeleteTrailingWS()<cr>
 " Delete trailing white space on save for some specific files
 "autocmd BufWrite *.py :call DeleteTrailingWS()
 "autocmd FileType c,cpp,python,prolog autocmd BufWrite :call DeleteTrailingWS()
+
 
