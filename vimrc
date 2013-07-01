@@ -16,7 +16,8 @@ Bundle 'vim-scripts/The-NERD-tree'
 
 """""""""""""""""""" GLOBAL
 let mapleader=","                           " define new leader key
-colorscheme molokai                         " a good colorsheme
+colorscheme molokai                         " a good dark colorscheme
+"colorscheme default                         " the default light colorscheme is good
 set gfn=terminus                            " set GUI font
 set go=                                     " set GUI option (none here)
 
