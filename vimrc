@@ -13,6 +13,7 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/The-NERD-Commenter'
 Bundle 'vim-scripts/The-NERD-tree'
+Bundle 'Rykka/riv.vim'
 
 """""""""""""""""""" GLOBAL
 let mapleader=","                           " define new leader key
