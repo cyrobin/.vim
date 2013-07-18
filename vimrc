@@ -52,7 +52,7 @@ set mouse=                                  " my mouse is too far from my keyboa
 set nocompatible                            " 'I want it all!' - no need for vi compatibiliy
 set backup                                  " create backup of edited files
 set backupdir=~/.vim/backup                 " set the backup files directory
-"set directory=~/.vim_tmp                   " set the tmp files directory
+set directory=~/.vim/tmp                   " set the tmp files directory
 "set noswapfile                             " disable the *.swp created by vim to recover from crash
 set fileformats=unix,dos,mac                " tell Vim how to read a file
 set laststatus=2                            " Always display the status line, even if only one window is displayed
