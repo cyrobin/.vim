@@ -331,7 +331,66 @@ au BufRead,BufNewFile *.ins  set syntax=tex
 
 "           set clipboard=unnamed
 "
-"
+
+
+"""""""""""""""""""" Vim Mode specific settings
+
+" Adapt the color and shape of the cursor depending on the vim current mode
+" Cursor Color -- for compatible terminal
+if &term =~ "xterm\\|rxvt"
+  " use an light blue cursor in insert mode
+  let &t_SI = "\<Esc>]12;#00BFFF\x7"
+  " use a green cursor otherwise
+  let &t_EI = "\<Esc>]12;green\x7"
+  silent !echo -ne "\033]12;green\007"
+  " reset cursor when vim exits
+  autocmd VimLeave * silent !echo -ne "\033]112\007"
+  " use \003]12;gray\007 for gnome-terminal
+endif
+
+" Cursor Shape -- for compatible terminal
+" Note : it seems that urxvt does not support this feature
+if &term =~ '^xterm'
+  " solid underscore
+  let &t_SI .= "\<Esc>[4 q"
+  " solid block
+  let &t_EI .= "\<Esc>[2 q"
+  " 1 or 0 -> blinking block
+  " 2 -> solid block
+  " 3 -> blinking underscore
+  " 4 -> solid underscore
+  " Recent versions of xterm (282 or above) also support
+  " 5 -> blinking vertical bar
+  " 6 -> solid vertical bar
+endif
+
+" Handle automatically the paste mode when pasting from clipboard
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+" Handle the automatic paste mode in t-mux
+" (need to double escape)
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
 """""""""""""""""""" CUSTOM FUNCTIONS
 
