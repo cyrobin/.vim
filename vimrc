@@ -134,8 +134,11 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
-" allows to use <CTRL+Space> (easy to reach) instead of escape
-inoremap <C-Space> <ESC>
+" alternative for the unreachable escape key
+" allows to use <CTRL+Space> (easy to reach) instead
+"inoremap <C-Space> <ESC>   " Does show a weird behaviou :-/
+"inoremap <S-Space> <ESC>   " Does show a weird behaviou :-/
+inoremap jkl <ESC>          " Note that jk is not enough because of 'Dijkstra'
 
 " Smart way to move between windows
 map <C-j> <C-W>j
