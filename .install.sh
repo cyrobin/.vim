@@ -24,8 +24,9 @@ then wget -q --directory-prefix=$HOME/.vim/spell/ \
     http://ftp.vim.org/vim/runtime/spell/en.utf-8.sug
 fi
 
-# Create the backup directory
+# Create the backup and tmp directory
 mkdir -p ~/.vim/backup
+mkdir -p ~/.vim/tmp
 
 # Install other plugins (including the molokai colortheme)
 echo "Install bundles w/vundle (warns molokai not found, and will install it)"
