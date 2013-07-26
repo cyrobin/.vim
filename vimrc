@@ -19,6 +19,7 @@ Bundle 'Rykka/riv.vim'
 let mapleader=","                           " define new leader key
 colorscheme molokai                         " a good dark colorscheme
 "colorscheme default                         " the default light colorscheme is good
+"colorscheme koehler                         " the koehler theme is good also
 set gfn=terminus                            " set GUI font
 set go=                                     " set GUI option (none here)
 
