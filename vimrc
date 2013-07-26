@@ -231,15 +231,10 @@ au BufRead,BufNewFile *.ecl  set syntax=prolog
 au BufRead,BufNewFile *.ins  set syntax=tex
 
 " when opening a file, jump to the last known cursor position
-if has("autocmd")
-  filetype plugin indent on
-    autocmd FileType text setlocal textwidth=78
-
-  autocmd BufReadPost *
+autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
           \   exe "normal g`\"" |
   \ endif
-endif
 
 ""filetype plugin indent on "Detection to determine the type of the current file
 "
