@@ -335,6 +335,7 @@ endif
                         " zr : fold reduce  decreses foldlevel by 1 (zR closes all folds
                         "
                         "
+" Native alternative to <ESC> : <CTRL + C >
 
 "Vim has extended vi to allow use of the * register as a reference to the system clipboard. So we can use normal mode commands like: "*dd or 1G"*yG to copy things into the * register and "*p to paste text from it. We can also use this * register with the ex yank command, so :%y * will accomplish the same goal as gg"*yG (copy all text into the system clipboard so it can be pasted into an X or MS Windows application). 
 "
