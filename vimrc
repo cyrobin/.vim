@@ -193,6 +193,9 @@ map <leader>sw :set wrap!<cr>
 " Map to insert python debugger
 map  <F10> <Esc>import pdb;pdb.set_trace()<CR><Esc>
 
+" Open current url in iceweasel
+vmap ,o :<C-U>!iceweasel "<cfile>" >& /dev/null<CR><CR>
+
 """""""""""""""""""" PLUGINS
 
 let g:Powerline_symbols = 'fancy'
