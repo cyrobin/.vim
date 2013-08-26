@@ -392,7 +392,7 @@ abbreviate <? <?php?><left><left>
 
 """"""""""""""""""""{{{ KEYBINDINGS (includings plugins)
 " Choose one
-source ~/.vim/vimrc.qwerty
-"source ~/.vim/vimrc.bepo
+"source ~/.vim/vimrc.qwerty
+source ~/.vim/vimrc.bepo
 "}}}
 
