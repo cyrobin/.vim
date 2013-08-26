@@ -125,7 +125,7 @@ nmap <C-b> :NERDTreeToggle<cr>
 
 """ Jedi disable auto completion popup
 let g:jedi#popup_on_dot = 0
-let g:jedi#show_function_definition = "0"
+let g:jedi#show_call_signatures = "0"
 
 "}}}
 
