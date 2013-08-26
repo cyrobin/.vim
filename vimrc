@@ -222,8 +222,12 @@ let g:jedi#show_function_definition = "0"
 
 """""""""""""""""""" FILES SPECIFIC
 
-au BufRead mutt-*        set ft=mail
-au BufRead mutt-*        set invhls
+au BufRead /tmp/mutt-*        set ft=mail
+au BufRead /tmp/mutt-*        set invhls
+au BufRead /tmp/mutt-*        set textwidth=72
+au BufRead /tmp/mutt-*        set spelllang=en,fr
+au BufRead /tmp/mutt-*        set spell
+
 au BufNewFile *.html 0r ~/.vim/templates/html.txt
 au BufRead,BufNewFile *.jsm setfiletype javascript
 au BufRead,BufNewFile *.xul setfiletype xml
@@ -468,3 +472,56 @@ nnoremap <leader>cws :call DeleteTrailingWS()<cr>
 "autocmd FileType c,cpp,python,prolog autocmd BufWrite :call DeleteTrailingWS()
 
 
+"""""""""""""""""""" Mutt-specific functions
+"" Mutt auto-completion in vim (use goobook)
+"" 
+"    fun! MailcompleteC(findstart, base)
+"        if a:findstart == 1
+"            let line = getline('.')
+"            let idx = col('.')
+"            while idx > 0
+"                let idx -= 1
+"                let c = line[idx]
+"                " break on header and previous email
+"                if c == ':' || c == '>'
+"                    return idx + 2
+"                else
+"                    continue
+"                endif
+"            endwhile
+"            return idx
+"        else
+"            if exists("g:goobookrc")
+"                let goobook="goobook -c " . g:goobookrc
+"            else
+"                let goobook="goobook"
+"            endif
+"            let res=system(goobook . ' query ' . shellescape(a:base))
+"            if v:shell_error
+"                return []
+"            else
+"                "return split(system(trim . '|' . fmt, res), '\n')
+"                return MailcompleteF(MailcompleteT(res))
+"            endif
+"        endif
+"    endfun
+"     
+"    fun! MailcompleteT(res)
+"        " next up: port this to vimscript!
+"        let trim="sed '/^$/d' | grep -v '(group)$' | cut -f1,2"
+"        return split(system(trim, a:res), '\n')
+"    endfun
+"     
+"    fun! MailcompleteF(contacts)
+"        "let fmt='awk ''BEGIN{FS="\t"}{printf "%s <%s>\n", $2, $1}'''
+"        let contacts=map(copy(a:contacts), "split(v:val, '\t')")
+"        let ret=[]
+"        for [email, name] in contacts
+"            call add(ret, printf("%s <%s>", name, email))
+"        endfor
+"        return ret
+"    endfun
+"     
+"     
+"    set completefunc=MailcompleteC
+"
