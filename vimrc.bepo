@@ -1,0 +1,246 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""" VIM Specifi mapping for the fr-dvorak / bépo keyboard layout
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""{{{ Keyboard remapping
+" {W} -> [É]
+" ——————————
+" On remappe W sur É :
+noremap é w
+noremap É W
+" Corollaire, pour effacer/remplacer un mot quand on n’est pas au début (daé / laé).
+" (attention, cela diminue la réactivité du {A}…)
+noremap aé aw
+noremap aÉ aW
+" Pour sauvegarder
+noremap :é :w
+noremap :É :W
+" Pour faciliter les manipulations de fenêtres, on utilise {W} comme un Ctrl+W :
+noremap w <C-w>
+noremap W <C-w><C-w>
+
+" [HJKL] -> {CTSR}
+" ————————————————
+" {cr} = « gauche / droite »
+noremap c h
+noremap r l
+" {ts} = « haut / bas »
+noremap t j
+noremap s k
+" {CR} = « haut / bas de l'écran »
+noremap C H
+noremap R L
+" {TS} = « joindre / aide »
+noremap T J
+noremap S K
+" Corollaire : repli suivant / précédent
+noremap zs zj
+noremap zt zk
+
+" {HJKL} <- [CTSR]
+" ————————————————
+" {J} = « Jusqu'à »            (j = suivant, J = précédant)
+noremap j t
+noremap J T
+" {L} = « Change »             (l = attend un mvt, L = jusqu'à la fin de ligne)
+noremap l c
+noremap L C
+" {H} = « Remplace »           (h = un caractère slt, H = reste en « Remplace »)
+noremap h r
+noremap H R
+" {K} = « Substitue »          (k = caractère, K = ligne)
+noremap k s
+noremap K S
+" Corollaire : correction orthographique
+noremap ]k ]s
+noremap [k [s
+
+" Désambiguation de {g}
+" —————————————————————
+" ligne écran précédente / suivante (à l'intérieur d'une phrase)
+noremap gs gk
+noremap gt gj
+" onglet précédant / suivant
+noremap gb gT
+noremap gé gt
+" optionnel : {gB} / {gÉ} pour aller au premier / dernier onglet
+noremap gB :exe "silent! tabfirst"<CR>
+noremap gÉ :exe "silent! tablast"<CR>
+" optionnel : {g"} pour aller au début de la ligne écran
+noremap g" g0
+
+" <> en direct
+" ————————————
+noremap « <
+noremap » >
+
+inoremap « <
+inoremap » >
+inoremap < «
+inoremap > »
+
+" Remaper la gestion des fenêtres
+" ———————————————————————————————
+noremap wt <C-w>j
+noremap ws <C-w>k
+noremap wc <C-w>h
+noremap wr <C-w>l
+noremap wd <C-w>c
+noremap wo <C-w>s
+noremap wp <C-w>o
+noremap w<SPACE> :split<CR>
+noremap w<CR> :vsplit<CR>
+
+" Limiter <shift> en mode normal (',' ';' '.' ':')
+" ————————————————————————————————————————————————
+" allows to use ; instead of , <leader>
+nnoremap ; :
+" switch . and : (no shift needed anymore ! )
+nnoremap . :
+nnoremap : ;
+
+"}}}
+
+""""""""""""""""""""{{{ KEYBINDINGS
+
+" Ease access to visual mode commands
+map v <C-v>
+vmap i <S-i>
+
+" Map for Bloc selection ?
+map  # {v}! par 72<CR>
+map  & {v}! par 72j<CR>
+
+" Map split swing
+nmap  <Tab> <C-w>w
+
+" Toggle spelling (and spell language choice)
+map  <leader>se :setlocal spell! spelllang=en<CR>
+map  <leader>sf :setlocal spell! spelllang=fr<CR>
+
+" Toggle highlight search
+map  <Space> :set invhls<CR>
+
+" Toggle CursorLine/-Column highlighting
+" Note that CursorLine/-Column usage may significatively slow vim (especially with big file)
+nmap <leader>c! :set cursorline!<cr>
+nmap <leader>c? :set cursorcolumn!<cr>
+
+" Toggle Paste mode
+set pastetoggle=<leader>p
+
+" In visual mode, replace block
+cmap <C-g> <C-u><ESC>
+
+" Allows sticky shift to go through as planned
+" -bang ... <bang> allows exclamation mark to work as well
+command! -bang W w<bang>
+command! -bang Q q<bang>
+command! -bang WQ wq<bang>
+command! -bang Wq wq<bang>
+
+" uses sudo mode afterwards
+"cmap w!! w !sudo tee % >/dev/null
+cmap é!! w !sudo tee % >/dev/null
+
+" Forces to get used to vim interface.
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" alternative for the unreachable escape key
+" (Note that CTRL+C is also a native alternative)
+inoremap tsr <ESC>
+
+" Smart way to move between windows
+map <C-c> <C-W>j
+map <C-t> <C-W>k
+map <C-s> <C-W>h
+map <C-r> <C-W>l
+
+" Ease long inner navigation (move half-screen up or down)
+noremap <C-S-t> <C-U>
+noremap <C-S-s> <C-D>
+
+" Move a line of text using ALT+[ts]
+" NB: it seems it does not work (<A- > or <M- > seems to have none effect :-( )
+nmap <M-t> mz:m+<cr>`z
+nmap <M-s> mz:m-2<cr>`z
+vmap <M-t> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-s> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" Useful mappings for managing tabs
+nmap <leader>tn :tabnew<cr>
+nmap <leader>te :tabe .<cr>
+nmap <leader>tt :tabe ./
+nmap <leader>to :tabonly<cr>
+nmap <leader>tc :tabclose<cr>
+nmap <leader>tm :tabmove
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+nmap <leader>th :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" cd to the directory containing the file in the buffer
+nmap  <leader>cd :lcd %:h
+
+" Toggle displayed text wrapping
+map <leader>sw :set wrap!<cr>
+
+" Map to insert python debugger
+map  <F10> <Esc>import pdb;pdb.set_trace()<CR><Esc>
+
+" Open current url in iceweasel
+vmap <leader>o :<C-U>!iceweasel "<cfile>" >& /dev/null<CR><CR>
+"" « v,d » et « v,s » lancent firefox et une recherche (définition ou synonyme) dans le tlfi sur le mot courant
+"vmap ,d :<C-U>!firefox "http://www.cnrtl.fr/lexicographie/<cword>" >& /dev/null<CR><CR>
+"vmap ,s :<C-U>!firefox "http://www.cnrtl.fr/synonymie/<cword>" >& /dev/null<CR><CR>
+"" « v,g » comme ci-dessus mais pour google
+"vmap ,g :<C-U>!firefox "http://www.google.fr/search?hl=fr&q=<cword>&btnG=Recherche+Google&meta=" >& /dev/null<CR><CR>
+""« v,w » comme ci-dessus mais pour wikipedia
+"vmap ,w :<C-U>!firefox "http://fr.wikipedia.org/wiki/<cword>" >& /dev/null<CR><CR>
+"" « v,c » comme ci-dessus mais pour le conjugueur
+"vmap ,c :<C-U>!firefox "http://www.leconjugueur.com/php5/index.php?v=<cword>" >& /dev/null<CR><CR>
+"}}}
+
+""""""""""""""""""""{{{ PLUGINS
+
+let g:Powerline_symbols = 'fancy'
+
+" Map for NerdCommenter
+map  <leader>ct <leader>c<space>
+vmap <leader>ct <leader>c<space>
+
+" Params and Map for NerdTree
+let NERDChristmasTree = 1
+let NERDTreeSortOrder = ['\/$', '\.js*', '\.cpp$', '\.h$', '*']
+nmap k :NERDTreeToggle<cr>
+nmap <C-b> :NERDTreeToggle<cr>
+
+""" Jedi disable auto completion popup
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_function_definition = "0"
+
+"}}}
+
+""""""""""""""""""""{{{ CUSTOM FUNCTIONS KEYBINDINGS
+:command -nargs=+ Find vimgrep <args>|cw
+
+""" FocusMode
+nnoremap <F8> :call ToggleFocusMode()<cr>
+nnoremap <leader>tf :call ToggleFocusMode()<cr>
+
+""" Allow/disallow textwidth formating
+nnoremap <F4> :call ToggleTextwidthMode()<cr>
+nnoremap <leader>tw :call ToggleTextwidthMode()<cr>
+
+""" Switch between tab value
+nnoremap <F5> :call SwitchTabValue()<cr>
+nnoremap <leader>stv :call SwitchTabValue()<cr>
+
+" Delete trailing white space 
+nnoremap <leader>cws :call DeleteTrailingWS()<cr>
+
+"}}}
+

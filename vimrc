@@ -1,4 +1,4 @@
-"""""""""""""""""""" PLUGINS
+""""""""""""""""""""{{{ PLUGINS
 filetype off                                " temporary -- required during vundle usage
 
 set rtp+=~/.vim/bundle/vundle/
@@ -15,7 +15,9 @@ Bundle 'vim-scripts/The-NERD-Commenter'
 Bundle 'vim-scripts/The-NERD-tree'
 Bundle 'Rykka/riv.vim'
 
-"""""""""""""""""""" GLOBAL
+"}}}
+
+""""""""""""""""""""{{{ GLOBAL
 let mapleader=","                           " define new leader key
 colorscheme molokai                         " a good dark colorscheme
 "colorscheme default                         " the default light colorscheme is good
@@ -86,141 +88,9 @@ set shell=zsh                               " use zsh as the default shell for :
 set foldmethod=marker                       " use marker to define folds
 "set foldmethod=indent                      " use indentation to define folds -- related to tabvalue.
 
-"""""""""""""""""""" KEYBINDINGS
+"}}}
 
-" Ease access to visual mode commands
-map v <C-v>
-vmap i <S-i>
-
-" Map for Bloc selection ?
-map  # {v}! par 72<CR>
-map  & {v}! par 72j<CR>
-
-" Map split swing
-nmap  <Tab> <C-w>w
-
-" Toggle spelling (and spell language choice)
-map  <leader>se :setlocal spell! spelllang=en<CR>
-map  <leader>sf :setlocal spell! spelllang=fr<CR>
-
-" Toggle highlight search
-map  <Space> :set invhls<CR>
-
-" Toggle CursorLine/-Column highlighting
-" Note that CursorLine/-Column usage may significatively slow vim (especially with big file)
-nmap c! :set cursorline!<cr>
-nmap c? :set cursorcolumn!<cr>
-
-" Toggle Paste mode
-set pastetoggle=<leader>p
-
-" In visual mode, replace block
-cmap <C-g> <C-u><ESC>
-
-" Allows sticky shift to go through as planned
-" -bang ... <bang> allows exclamation mark to work as well
-command! -bang W w<bang>
-command! -bang Q q<bang>
-command! -bang WQ wq<bang>
-command! -bang Wq wq<bang>
-
-" allows to use ; instead of : : no shift needed anymore ! :-)
-nnoremap ; :
-
-" uses sudo mode afterwards
-cmap w!! w !sudo tee % >/dev/null
-
-" Forces to get used to vim interface.
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
-" alternative for the unreachable escape key
-" allows to use <CTRL+Space> (easy to reach) instead
-"inoremap <C-Space> <ESC>   " Does show a weird behaviou :-/
-"inoremap <S-Space> <ESC>   " Does show a weird behaviou :-/
-inoremap jkl <ESC>          " Note that jk is not enough because of 'Dijkstra'
-
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Ease long inner navigation (move half-screen up or down)
-noremap <leader>k <C-U>
-noremap <leader>j <C-D>
-
-" Move a line of text using ALT+[jk]
-" NB: it seems it does not work (<A- > or <M- > seems to have none effect :-( )
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-"" Move lines up and down with ALT+k\j
-"nnoremap ª :m .+1<CR>==
-"nnoremap º :m .-2<CR>==
-"
-"inoremap ª <Esc>:m .+1<CR>==gi
-"inoremap º <Esc>:m .-2<CR>==gi
-"
-"vnoremap ª :m '>+1<CR>gv=gv
-"vnoremap º :m '<-2<CR>gv=gv
-
-" Useful mappings for managing tabs
-nmap <leader>tn :tabnew<cr>
-nmap <leader>te :tabe .<cr>
-nmap <leader>tt :tabe ./
-nmap <leader>to :tabonly<cr>
-nmap <leader>tc :tabclose<cr>
-nmap <leader>tm :tabmove
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-nmap <leader>th :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Map Vim 9 to first non-blank character
-"map 9 ^
-
-" cd to the directory containing the file in the buffer
-nmap  <leader>cd :lcd %:h
-
-" Toggle displayed text wrapping
-map <leader>sw :set wrap!<cr>
-
-" Map to insert python debugger
-map  <F10> <Esc>import pdb;pdb.set_trace()<CR><Esc>
-
-" Open current url in iceweasel
-vmap ,o :<C-U>!iceweasel "<cfile>" >& /dev/null<CR><CR>
-
-"""""""""""""""""""" PLUGINS
-
-let g:Powerline_symbols = 'fancy'
-
-" Map for NerdCommenter
-map cc <leader>c<space>
-map ca <leader>ca
-map cs <leader>cs
-map ci <leader>ci
-vmap cc <leader>c<space>
-vmap ca <leader>ca
-vmap cs <leader>cs
-vmap ci <leader>ci
-
-" Params and Map for NerdTree
-let NERDChristmasTree = 1
-let NERDTreeSortOrder = ['\/$', '\.js*', '\.cpp$', '\.h$', '*']
-nmap t :NERDTreeToggle<cr>
-nmap <C-b> :NERDTreeToggle<cr>
-
-""" Jedi disable auto completion popup
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_function_definition = "0"
-
-"""""""""""""""""""" FILES SPECIFIC
+""""""""""""""""""""{{{ FILES SPECIFIC
 
 au BufRead /tmp/mutt-*        set ft=mail
 au BufRead /tmp/mutt-*        set invhls
@@ -286,23 +156,9 @@ autocmd BufReadPost *
 "
 "au FileType txt setlocal fo+=tn
 
-"""""""""""""""""""" ABBREVIATIONS
-"abbreviate #i #include
-"abbreviate #d #define
-"
-"abbreviate <a <a href=""></a><left><left><left><left><left>
-"abbreviate <i <img src="" /><left><left><left>
-"abbreviate l" &ldquo;&rdquo;<left><left><left><left><left><left>
-"abbreviate r" &rdquo;
-"abbreviate l' &lsquo;
-"abbreviate r' &rsquo;
-"abbreviate "" &quot;&quot;<left><left><left><left><left>
-"
-"abbreviate <? <?php?><left><left>
+"}}}
 
-
-"""""""""""""""""""" MISCELLANEOUS SETTINGS
-
+""""""""""""""""""""{{{ MISCELLANEOUS SETTINGS
 "" (dict) dictionary used for keyword completion
 "" to use: while in insertion mode and in the middle of a word, type <ctrl-n> and <ctrl-p>
 "set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
@@ -313,46 +169,9 @@ autocmd BufReadPost *
 ""set thesaurus-=/usr/share/dict/mobythes.aur thesaurus+=/usr/share/dict/mobythes.aur
 ""set complete-=k complete+=k
 
-"""""""""""""""""""" COMMAND REFERENCES
+"}}}
 
-" *                     - searches for word under cursor
-" gd                    - finds definition of variable/function under cursor
-" ga                    - prints the ascii value of character under cursor
-" gf                    - opens file under the cursor (in split view)
-" gi                    - goes to insert mode in the same spot as you last inserted
-" ~                     - changes case of character
-" :r !<cmd>             - reads the output of the shell <cmd> into the file
-" :% s/hello/A/gc       - typical search and replace command
-
-" :% !tidy              - runs the code through the 'tidy' program
-
-" :runtime! syntax/2html.vim
-" :10,40TOhtml
-
-" command reference ->  " za : fold toggle  toggles between a fold being opened and closed (zA does it recursively)
-                        " zf : create/define a fold (compatible with motion or visual mode
-                        " zc : fold close   close 1 fold under the cursor (zC does it recursively)
-                        " zo : fold open    open 1 fold under the cursor (zO does it recursively)
-                        " zm : fold more    increases foldlevel by 1 (zM opens all folds)
-                        " zr : fold reduce  decreses foldlevel by 1 (zR closes all folds
-                        "
-                        "
-" Native alternative to <ESC> : <CTRL + C >
-
-"Vim has extended vi to allow use of the * register as a reference to the system clipboard. So we can use normal mode commands like: "*dd or 1G"*yG to copy things into the * register and "*p to paste text from it. We can also use this * register with the ex yank command, so :%y * will accomplish the same goal as gg"*yG (copy all text into the system clipboard so it can be pasted into an X or MS Windows application). 
-"
-"    "+2yy – copy two lines to X11 clipboard
-"    "+dd – cut line to X11 clipboard
-"    "+p – paste X11 clipboard 
-"
-"
-" VimTip21 is spot on but the title suggests it's for MS Windows only. It also mentions that we can change out settings so the "anonymous" register is aliased to the * register using:
-
-"           set clipboard=unnamed
-"
-
-
-"""""""""""""""""""" Vim Mode specific settings
+""""""""""""""""""""{{{ VIM MODES DISPLAY and SETTINGS
 
 " Adapt the color and shape of the cursor depending on the vim current mode
 " Cursor Color -- for compatible terminal
@@ -411,9 +230,9 @@ endfunction
 let &t_SI .= WrapForTmux("\<Esc>[?2004h")
 let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
-"""""""""""""""""""" CUSTOM FUNCTIONS
+"}}}
 
-:command -nargs=+ Find vimgrep <args>|cw
+""""""""""""""""""""{{{ CUSTOM FUNCTIONS
 
 """ FocusMode
 function! ToggleFocusMode()
@@ -434,8 +253,6 @@ function! ToggleFocusMode()
     execute 'colorscheme ' . g:colors_name
   endif
 endfunc
-nnoremap <F8> :call ToggleFocusMode()<cr>
-nnoremap <leader>tf :call ToggleFocusMode()<cr>
 
 """ Allow/disallow textwidth formating
 function! ToggleTextwidthMode()
@@ -445,8 +262,6 @@ function! ToggleTextwidthMode()
     set textwidth=0
   endif
 endfunc
-nnoremap <F4> :call ToggleTextwidthMode()<cr>
-nnoremap <leader>tw :call ToggleTextwidthMode()<cr>
 
 """ Switch between tab value
 function! SwitchTabValue()
@@ -456,8 +271,6 @@ function! SwitchTabValue()
     set softtabstop=4 tabstop=4 shiftwidth=4
   endif
 endfunc
-nnoremap <F5> :call SwitchTabValue()<cr>
-nnoremap <leader>stv :call SwitchTabValue()<cr>
 
 " Delete trailing white space 
 function! DeleteTrailingWS()
@@ -465,14 +278,14 @@ function! DeleteTrailingWS()
   %s/\s\+$//ge
   execute "normal `z"
 endfunc
-nnoremap <leader>cws :call DeleteTrailingWS()<cr>
 
 " Delete trailing white space on save for some specific files
 "autocmd BufWrite *.py :call DeleteTrailingWS()
 "autocmd FileType c,cpp,python,prolog autocmd BufWrite :call DeleteTrailingWS()
 
+"}}}
 
-"""""""""""""""""""" Mutt-specific functions
+""""""""""""""""""""{{{  MUTT-SPECIFIC FUNCTIONS
 "" Mutt auto-completion in vim (use goobook)
 "" 
 "    fun! MailcompleteC(findstart, base)
@@ -524,4 +337,62 @@ nnoremap <leader>cws :call DeleteTrailingWS()<cr>
 "     
 "     
 "    set completefunc=MailcompleteC
-"
+
+"}}}
+
+""""""""""""""""""""{{{ ABBREVIATIONS
+abbreviate #i #include
+abbreviate #d #define
+
+abbreviate <a <a href=""></a><left><left><left><left><left>
+abbreviate <i <img src="" /><left><left><left>
+
+abbreviate "" &quot;&quot;<left><left><left><left><left>
+
+abbreviate <? <?php?><left><left>
+
+"}}}
+
+""""""""""""""""""""{{{ COMMAND REFERENCES
+
+" *                     - searches for word under cursor
+" gd                    - finds definition of variable/function under cursor
+" ga                    - prints the ascii value of character under cursor
+" gf                    - opens file under the cursor (in split view)
+" gi                    - goes to insert mode in the same spot as you last inserted
+" ~                     - changes case of character
+" :r !<cmd>             - reads the output of the shell <cmd> into the file
+
+" :% s/hello/A/gc       - typical search and replace command
+" :% !tidy              - runs the code through the 'tidy' program
+
+" :runtime! syntax/2html.vim
+" :10,40TOhtml
+
+" za        - fold toggle   toggles between open/closed fold (zA does it recursively)
+" zf        - create/define a fold (compatible with motion or visual mode)
+" zc        - fold close    (zC is recursive)
+" zo        - fold open     (zO is recursive)
+" zm        - fold more     increases foldlevel by 1 (zM opens all folds)
+" zr        - fold reduce   decreses foldlevel by 1 (zR closes all folds
+
+" Native alternative to <ESC> : <CTRL + C >
+
+" * register refers to the system clipboard
+" e.g. :    copy   "*dd    or  1G"*yG  
+"           paste  "*dd    or  1G"*yG  
+
+" +2yy      - copy two lines to X11 clipboard
+" +dd       - cut line to X11 clipboard
+" +p        - paste X11 clipboard 
+
+" see also  set clipboard=unnamed
+
+"}}}
+
+""""""""""""""""""""{{{ KEYBINDINGS (includings plugins)
+" Choose one
+source ~/.vim/vimrc.qwerty
+"source ~/.vim/vimrc.bepo
+"}}}
+
