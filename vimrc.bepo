@@ -1,6 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""" VIM Specifi mapping for the fr-dvorak / bépo keyboard layout
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let my_layout="bepo"
 
 """"""""""""""""""""{{{ Keyboard remapping
 " {W} -> [É]
@@ -15,6 +16,8 @@ noremap aÉ aW
 " Pour sauvegarder
 noremap :é :w
 noremap :É :W
+noremap .é :w
+noremap .É :W
 " Pour faciliter les manipulations de fenêtres, on utilise {W} comme un Ctrl+W :
 noremap w <C-w>
 noremap W <C-w><C-w>
@@ -73,7 +76,7 @@ noremap g" g0
 " ————————————
 noremap « <
 noremap » >
-
+" pour la programmation
 inoremap « <
 inoremap » >
 inoremap < «
@@ -91,13 +94,20 @@ noremap wp <C-w>o
 noremap w<SPACE> :split<CR>
 noremap w<CR> :vsplit<CR>
 
-" Limiter <shift> en mode normal (',' ';' '.' ':')
-" ————————————————————————————————————————————————
-" allows to use ; instead of , <leader>
-nnoremap ; :
-" switch . and : (no shift needed anymore ! )
+" Limiter <shift> en mode normal
+" ——————————————————————————————
+" allows to use . instead of :
 nnoremap . :
-nnoremap : ;
+" enable '.' (repeat last action)
+nnoremap … .
+
+
+" Doubler certaints raccourcis pénibles
+" —————————————————————————————————————
+noremap k $
+noremap è y
+noremap è y
+noremap zj za
 
 "}}}
 
@@ -153,11 +163,11 @@ map <right> <nop>
 " (Note that CTRL+C is also a native alternative)
 inoremap tsr <ESC>
 
-" Smart way to move between windows
-map <C-c> <C-W>j
-map <C-t> <C-W>k
-map <C-s> <C-W>h
-map <C-r> <C-W>l
+"" Smart way to move between windows
+"jkmap <C-c> <C-W>j
+"jkmap <C-t> <C-W>k
+"jkmap <C-s> <C-W>h
+"jkmap <C-r> <C-W>l
 
 " Ease long inner navigation (move half-screen up or down)
 noremap <C-S-t> <C-U>
@@ -171,12 +181,12 @@ vmap <M-t> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-s> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " Useful mappings for managing tabs
-nmap <leader>tn :tabnew<cr>
-nmap <leader>te :tabe .<cr>
-nmap <leader>tt :tabe ./
-nmap <leader>to :tabonly<cr>
-nmap <leader>tc :tabclose<cr>
-nmap <leader>tm :tabmove
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>te :tabe .<cr>
+nnoremap <leader>tt :tabe ./
+nnoremap <leader>to :tabonly<cr>
+nnoremap <leader>tc :tabclose<cr>
+nnoremap <leader>tm :tabmove
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -214,13 +224,23 @@ vmap <leader>ct <leader>c<space>
 
 " Params and Map for NerdTree
 let NERDChristmasTree = 1
-let NERDTreeSortOrder = ['\/$', '\.js*', '\.cpp$', '\.h$', '*']
+let NERDTreeSortOrder = ['\/$', '\.py$', '\.cpp$', '\.c$', '\.hpp$', '\.h$', '*']
 nmap k :NERDTreeToggle<cr>
-nmap <C-b> :NERDTreeToggle<cr>
+let NERDTreeMapOpenInTab='h'
+let NERDTreeMapOpenInTabSilent='H'
+let NERDTreeMapOpenVSplit='<C-v>'
+let NERDTreeMapJumpFirstChild='S'
+let NERDTreeMapJumpLastChild='T'
+let NERDTreeMapJumpNextSibling='<C-T>'
+let NERDTreeMapJumpPrevSibling='<C-S>'
+"let NERDTreeMapChdir='L'
+"let NERDTreeMapRefresh='j'
+"let NERDTreeMapRefreshRoot='J'
 
 """ Jedi disable auto completion popup
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = "0"
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#show_call_signatures = "0"
+
 
 "}}}
 

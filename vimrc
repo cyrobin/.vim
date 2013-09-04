@@ -13,15 +13,14 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/The-NERD-Commenter'
 Bundle 'vim-scripts/The-NERD-tree'
-Bundle 'Rykka/riv.vim'
+"Bundle 'Rykka/riv.vim'
 
 "}}}
 
 """"""""""""""""""""{{{ GLOBAL
 let mapleader=","                           " define new leader key
 colorscheme molokai                         " a good dark colorscheme
-"colorscheme default                         " the default light colorscheme is good
-"colorscheme koehler                         " the koehler theme is good also
+"color summerfruit256                        " a good light colorscheme
 set gfn=terminus                            " set GUI font
 set go=                                     " set GUI option (none here)
 
@@ -106,6 +105,9 @@ au filetype html,xml set listchars-=tab:>.
 au BufRead,BufNewFile *.md  set syntax=rst
 au BufRead,BufNewFile *.ecl  set syntax=prolog
 au BufRead,BufNewFile *.ins  set syntax=tex
+
+au BufRead,BufNewFile *.ability set syntax=c
+au BufRead,BufNewFile *.task    set syntax=c
 
 " when opening a file, jump to the last known cursor position
 autocmd BufReadPost *
@@ -390,9 +392,22 @@ abbreviate <? <?php?><left><left>
 
 "}}}
 
-""""""""""""""""""""{{{ KEYBINDINGS (includings plugins)
-" Choose one
-"source ~/.vim/vimrc.qwerty
-source ~/.vim/vimrc.bepo
-"}}}
+""""""""""""""""""""{{{ KEYBINDINGS (includings plugins) AND ALIAS
+" bépo layout
+if $MYLAYOUT=="bepo"
+    source ~/.vim/vimrc.bepo
+else 
+" default layout : qwerty/azerty
+    source ~/.vim/vimrc.qwerty
+endif
+
+" Alias (depends on the keybindings)
+" One may want to use the ".vim/syntax/" system instead :
+" the following work-around enable alias for multiple keyboard layouts
+au filetype rst execute "source ~/.vim/alias/".my_layout."/rst.vim"
+au filetype tex execute "source ~/.vim/alias/".my_layout."/tex.vim"
+
+
+
+"}}à
 
