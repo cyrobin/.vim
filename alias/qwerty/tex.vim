@@ -30,6 +30,6 @@ map! ,fig \begin{figure}<CR><TAB>\centering<CR>\includegraphics[width=0.9\column
 
 " Add a chapter, section, subsection with its label. The cursor is at the
 " beginning of the {chapter|section|...} name
-map! ,ch \chapter{}<CR>\label{chapter\|}<ESC>0k$i
-map! ,se \section{}<CR>\label{sect\|}<ESC>0k$i 
-map! ,sse \subsection{}<CR>\abel{subssect\|}<ESC>0k$i
+map! ,ch \chapter{}<CR>\label{chp:}<ESC>0k$i
+map! ,se \section{}<CR>\label{sec:}<ESC>0k$i 
+map! ,sse \subsection{}<CR>\abel{ssec:}<ESC>0k$i
