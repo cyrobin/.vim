@@ -4,15 +4,28 @@ filetype off                                " temporary -- required during vundl
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" require to handle other plugins
 Bundle 'gmarik/vundle'
+" colortheme
 Bundle 'tomasr/molokai'
+" Python completion - incompatible with YCM
 Bundle 'davidhalter/jedi-vim'
+" C/C++/Python Completion - incompatible with jedi-vim
+" require the last version of vim...
+"Bundle 'Valloric/YouCompleteMe'
+" fancy powerline (bottom)
 Bundle 'Lokaltog/vim-powerline'
+" git info in the file
 Bundle 'airblade/vim-gitgutter'
+" ???
 Bundle 'msanders/snipmate.vim'
+" match parenthesis
 Bundle 'vim-scripts/matchit.zip'
+" comment/uncomment large amount of code
 Bundle 'vim-scripts/The-NERD-Commenter'
+" file tree
 Bundle 'vim-scripts/The-NERD-tree'
+" interesting features for rst files
 "Bundle 'Rykka/riv.vim'
 
 "}}}
@@ -84,30 +97,34 @@ set suffixes+=.old
 
 set shell=zsh                               " use zsh as the default shell for :! cmd
 "set shellcmdflag=-ci                       " load zshrc (interactive shell)
-set foldmethod=marker                       " use marker to define folds
-"set foldmethod=indent                      " use indentation to define folds -- related to tabvalue.
+"set foldmethod=marker                       " use marker to define folds
+"set foldmethod=indent                       " use indentation to define folds -- related to tabvalue.
+set foldmethod=syntax                       " use syntax to define folds
 
 "}}}
 
 """"""""""""""""""""{{{ FILES SPECIFIC
 
-au BufRead /tmp/mutt-*        set ft=mail
-au BufRead /tmp/mutt-*        set invhls
-au BufRead /tmp/mutt-*        set textwidth=72
-au BufRead /tmp/mutt-*        set spelllang=en,fr
-au BufRead /tmp/mutt-*        set spell
+au BufRead /tmp/mutt-*          set ft=mail
+au BufRead /tmp/mutt-*          set invhls
+au BufRead /tmp/mutt-*          set textwidth=72
+au BufRead /tmp/mutt-*          set spelllang=en,fr
+au BufRead /tmp/mutt-*          set spell
+au BufRead /tmp/mutt-*          normal zR
 
 au BufNewFile *.html 0r ~/.vim/templates/html.txt
 au BufRead,BufNewFile *.jsm setfiletype javascript
 au BufRead,BufNewFile *.xul setfiletype xml
-au filetype html,xml set listchars-=tab:>.
+au filetype html,xml            set listchars-=tab:>.
 
-au BufRead,BufNewFile *.md  set syntax=rst
-au BufRead,BufNewFile *.ecl  set syntax=prolog
-au BufRead,BufNewFile *.ins  set syntax=tex
+au BufRead,BufNewFile *.md      set syntax=rst
+au BufRead,BufNewFile *.ecl     set syntax=prolog
+au BufRead,BufNewFile *.ins     set syntax=tex
 
 au BufRead,BufNewFile *.ability set syntax=c
 au BufRead,BufNewFile *.task    set syntax=c
+
+au BufRead,BufNewFile *.zsh-theme    set syntax=zsh
 
 " when opening a file, jump to the last known cursor position
 autocmd BufReadPost *
@@ -115,48 +132,55 @@ autocmd BufReadPost *
           \   exe "normal g`\"" |
   \ endif
 
-""filetype plugin indent on "Detection to determine the type of the current file
-"
-"au BufRead *.stl so $VIMRUNTIME/syntax/html.vim
-"au BufNewFile,BufRead *.rst so $VIMRUNTIME/syntax/rst.vim
-"au BufNewFile,BufRead *.rst setlocal spell spelllang=fr
-"let g:languagetool_jar=$HOME . '/Program/LanguageTool/LanguageTool.jar'
-""Completion Python
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-":au BufWinEnter *.py let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
-":au BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-"
-"" autocmd filetype html set omnifunc=htmlcomplete#CompleteTags
-"autocmd filetype css set omnifunc=csscomplete#CompleteCSS
-"au filetype javascript set omnifunc=javascriptcomplete#CompleteJS
-"au filetype c set omnifunc=ccomplete#Complete
-"au filetype php set omnifunc=phpcomplete#CompletePHP
-"au filetype ruby set omnifunc=rubycomplete#Complete
-"au filetype sql set omnifunc=sqlcomplete#Complete
-"au filetype xml set omnifunc=xmlcomplete#CompleteTags
-"
-"autocmd FileType html set shiftwidth=2 "Défini 4 espace comme taille d'indentation
-"autocmd FileType html set tabstop=2 "Défini 2 espace commet taille d'indentation
-"autocmd FileType html set softtabstop=2 "Nombre d'espaces qu'un <Tab> ou <RetArr> représentent
-"
-"au FileType xml setlocal foldmethod=syntax
-""Surligne les espaces de fin de ligne
-"highlight WhitespaceEOL ctermbg=red guibg=red
-"match WhitespaceEOL /\s\+$/
-"" Supprime automatiquement les espaces de fin de ligne
-"autocmd BufWritePre * :%s/\s\+$//e
+"filetype plugin indent on "Detection to determine the type of the current file
 
-"au FileType xhtml,html,htmhp,xml setlocal tabstop=2
-"au FileType xhtml,html,htmhp,xml setlocal shiftwidth=2
-""au FileType xhtml,html,htmhp,xml setlocal expandtab      " (et) expand tabs to spaces (use :retab to redo entire file)
-"au FileType xhtml,html,htmhp,xml setlocal softtabstop=2   " (sts) makes spaces feel like tabs (like deleting)
+au BufRead *.stl so $VIMRUNTIME/syntax/html.vim
+au BufNewFile,BufRead *.rst so $VIMRUNTIME/syntax/rst.vim
+au BufNewFile,BufRead *.rst setlocal spell spelllang=en,fr
+au BufRead,BufNewFile *.tex setlocal spell spelllang=en,fr
+
+"let g:languagetool_jar=$HOME . '/Program/LanguageTool/LanguageTool.jar'
 "
-"au FileType c,h,java,js setlocal mps+==:;                   " allow the match pairs operation (%) to work with '=' and ';'
+"Completion Python
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+:au BufWinEnter *.py let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+:au BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
+autocmd filetype html set omnifunc=htmlcomplete#CompleteTags
+autocmd filetype css set omnifunc=csscomplete#CompleteCSS
+au filetype javascript set omnifunc=javascriptcomplete#CompleteJS
+au filetype c set omnifunc=ccomplete#Complete
+au filetype php set omnifunc=phpcomplete#CompletePHP
+au filetype ruby set omnifunc=rubycomplete#Complete
+au filetype sql set omnifunc=sqlcomplete#Complete
+au filetype xml set omnifunc=xmlcomplete#CompleteTags
+
+autocmd FileType html set shiftwidth=2 "Défini 2 espace comme taille d'indentation
+autocmd FileType html set tabstop=2 "Défini 2 espace comme taille d'indentation
+autocmd FileType html set softtabstop=2 "Nombre d'espaces qu'un <Tab> ou <RetArr> représentent
+
+autocmd FileType tex set shiftwidth=2 "Défini 2 espace comme taille d'indentation
+autocmd FileType tex set tabstop=2 "Défini 2 espace comme taille d'indentation
+autocmd FileType tex set softtabstop=2 "Nombre d'espaces qu'un <Tab> ou <RetArr> représentent
+
+"Surligne les espaces de fin de ligne
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
+" Supprime automatiquement les espaces de fin de ligne
+"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre *.py :%s/\s\+$//e
+
+au FileType xhtml,html,htmhp,xml setlocal tabstop=2
+au FileType xhtml,html,htmhp,xml setlocal shiftwidth=2
+au FileType xhtml,html,htmhp,xml setlocal expandtab      " (et) expand tabs to spaces (use :retab to redo entire file)
+au FileType xhtml,html,htmhp,xml setlocal softtabstop=2   " (sts) makes spaces feel like tabs (like deleting)
+
+au FileType c,h,java,js setlocal mps+==:;                   " allow the match pairs operation (%) to work with '=' and ';'
 "
-"au FileType c,h setlocal cindent                            " enable the intelligent cindent (cin) feature for the following files
-"au FileType java,js setlocal smartindent                    " enable the smartindenting (si) feature for the following files
-"
-"au FileType txt setlocal fo+=tn
+au FileType c,h setlocal cindent                            " enable the intelligent cindent (cin) feature for the following files
+au FileType java,js setlocal smartindent                    " enable the smartindenting (si) feature for the following files
+
+au FileType txt setlocal fo+=tn
 
 "}}}
 
@@ -274,7 +298,7 @@ function! SwitchTabValue()
   endif
 endfunc
 
-" Delete trailing white space 
+" Delete trailing white space
 function! DeleteTrailingWS()
   execute "normal mz"
   %s/\s\+$//ge
@@ -289,7 +313,7 @@ endfunc
 
 """"""""""""""""""""{{{  MUTT-SPECIFIC FUNCTIONS
 "" Mutt auto-completion in vim (use goobook)
-"" 
+""
 "    fun! MailcompleteC(findstart, base)
 "        if a:findstart == 1
 "            let line = getline('.')
@@ -320,13 +344,13 @@ endfunc
 "            endif
 "        endif
 "    endfun
-"     
+"
 "    fun! MailcompleteT(res)
 "        " next up: port this to vimscript!
 "        let trim="sed '/^$/d' | grep -v '(group)$' | cut -f1,2"
 "        return split(system(trim, a:res), '\n')
 "    endfun
-"     
+"
 "    fun! MailcompleteF(contacts)
 "        "let fmt='awk ''BEGIN{FS="\t"}{printf "%s <%s>\n", $2, $1}'''
 "        let contacts=map(copy(a:contacts), "split(v:val, '\t')")
@@ -336,8 +360,8 @@ endfunc
 "        endfor
 "        return ret
 "    endfun
-"     
-"     
+"
+"
 "    set completefunc=MailcompleteC
 
 "}}}
@@ -381,12 +405,12 @@ abbreviate <? <?php?><left><left>
 " Native alternative to <ESC> : <CTRL + C >
 
 " * register refers to the system clipboard
-" e.g. :    copy   "*dd    or  1G"*yG  
-"           paste  "*dd    or  1G"*yG  
+" e.g. :    copy   "*dd    or  1G"*yG
+"           paste  "*dd    or  1G"*yG
 
 " +2yy      - copy two lines to X11 clipboard
 " +dd       - cut line to X11 clipboard
-" +p        - paste X11 clipboard 
+" +p        - paste X11 clipboard
 
 " see also  set clipboard=unnamed
 
