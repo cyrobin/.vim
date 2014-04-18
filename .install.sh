@@ -32,6 +32,11 @@ mkdir -p ~/.vim/tmp
 echo "Install bundles w/vundle (warns molokai not found, and will install it)"
 vim +BundleInstall +qall
 
+# Install C/C++ support for YouCompleteMe
+#echo "Installing C/C++ support for YCM (clang)."
+#cd ~/.vim/bundle/YouCompleteMe
+#./install.sh --clang-completer
+
 # Install fonts
 echo "Patch font for Powerline. You might need to install 'python-fontforge'."
 mkdir -p ~/.fonts
