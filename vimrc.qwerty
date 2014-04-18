@@ -186,6 +186,7 @@ nnoremap <F5> :call SwitchTabValue()<cr>
 nnoremap <leader>stv :call SwitchTabValue()<cr>
 
 " Delete trailing white space 
+nnoremap <F6> :call DeleteTrailingWS()<cr>
 nnoremap <leader>cws :call DeleteTrailingWS()<cr>
 
 "}}}

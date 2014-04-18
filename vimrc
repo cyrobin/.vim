@@ -418,12 +418,13 @@ abbreviate <? <?php?><left><left>
 
 """"""""""""""""""""{{{ KEYBINDINGS (includings plugins) AND ALIAS
 " bépo layout
-if $MYLAYOUT=="bepo"
-    source ~/.vim/vimrc.bepo
-else 
-" default layout : qwerty/azerty
-    source ~/.vim/vimrc.qwerty
-endif
+"if $MYLAYOUT=="bepo"
+    "source ~/.vim/vimrc.bepo
+"else
+"" default layout : qwerty/azerty
+    "source ~/.vim/vimrc.qwerty
+"endif
+source ~/.vim/vimrc.bepo
 
 " Alias (depends on the keybindings)
 " One may want to use the ".vim/syntax/" system instead :
@@ -433,5 +434,5 @@ au filetype tex execute "source ~/.vim/alias/".my_layout."/tex.vim"
 
 
 
-"}}à
+"}}}
 
