@@ -196,6 +196,15 @@ au FileType txt setlocal fo+=tn
 ""set complete-=k complete+=k
 
 "}}}
+"
+" Spell shortcuts (memo)
+"   To move to a misspelled word, use ]s and [s.
+"   z= will suggest a list of alternatives that may be correct.
+"   Just hit Enter if none of the suggestions work, or enter the number for the correct word.
+"   Use zg to add the word to the dictionary. 
+"   You can also mark words as incorrect using zw.
+"
+" For auto-completion use CTRL-p and CTRL-n
 
 """"""""""""""""""""{{{ VIM MODES DISPLAY and SETTINGS
 
