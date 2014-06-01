@@ -49,10 +49,10 @@ nnoremap ; :
 cmap w!! w !sudo tee % >/dev/null
 
 " Forces to get used to vim interface.
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+"map <up> <nop>
+"map <down> <nop>
+"map <left> <nop>
+"map <right> <nop>
 
 " alternative for the unreachable escape key
 " (Note that CTRL+C is also a native alternative)
