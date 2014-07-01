@@ -319,8 +319,8 @@ function! DeleteTrailingWS()
 endfunc
 
 " Delete trailing white space on save for some specific files
-"autocmd BufWrite *.py :call DeleteTrailingWS()
-"autocmd FileType c,cpp,python,prolog autocmd BufWrite :call DeleteTrailingWS()
+autocmd BufWrite *.py,*.tex,*.bib :call DeleteTrailingWS()
+autocmd FileType c,cpp,python,prolog autocmd BufWrite :call DeleteTrailingWS()
 
 "}}}
 
