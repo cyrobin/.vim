@@ -64,6 +64,7 @@ set list                                    " whitespace characters are made vis
 set listchars=tab:→·,trail:·,extends:→,precedes:→,nbsp:␣    " choose how to display those characters
 set ttyfast                                 " fast local tty
 set mouse=                                  " my mouse is too far from my keyboard -- disable it. Always.
+"set mouse=a                                 " in case one use mouse, skip line number
 set nocompatible                            " 'I want it all!' - no need for vi compatibiliy
 set backup                                  " create backup of edited files
 set backupdir=~/.vim/backup                 " set the backup files directory
@@ -77,7 +78,8 @@ set softtabstop=4 tabstop=4 shiftwidth=4    " set tab value for its different us
 set ruler                                   " display the cursor position on the last line of the screen
 set t_Co=256                                " force 256 colors
 set invhls
-set clipboard=unnamed                       " Uses OS clipboard (shares clipboard accross vim instances)
+"set clipboard=unnamed                       " Uses OS clipboard (mouse clipboard) (shares clipboard accross vim instances)
+set clipboard=unnamedplus                   " Uses OS clipboard (C-c / C-v) (shares clipboard accross vim instances)
 set lazyredraw                              " don't redraw when running macros
 "set cursorline                             " highlight the cursor line
 set tabpagemax=20                           "allow for 20 tabs when opening ; default is 10.
