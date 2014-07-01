@@ -405,9 +405,6 @@ abbreviate <? <?php?><left><left>
 " :% s/hello/A/gc       - typical search and replace command
 " :% !tidy              - runs the code through the 'tidy' program
 
-" :runtime! syntax/2html.vim
-" :10,40TOhtml
-
 " za        - fold toggle   toggles between open/closed fold (zA does it recursively)
 " zf        - create/define a fold (compatible with motion or visual mode)
 " zc        - fold close    (zC is recursive)
@@ -430,13 +427,7 @@ abbreviate <? <?php?><left><left>
 "}}}
 
 """"""""""""""""""""{{{ KEYBINDINGS (includings plugins) AND ALIAS
-" bépo layout
-"if $MYLAYOUT=="bepo"
-    "source ~/.vim/vimrc.bepo
-"else
-"" default layout : qwerty/azerty
-    "source ~/.vim/vimrc.qwerty
-"endif
+"source ~/.vim/vimrc.qwerty
 source ~/.vim/vimrc.bepo
 
 " Alias (depends on the keybindings)
