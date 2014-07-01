@@ -109,7 +109,9 @@ set foldmethod=syntax                       " use syntax to define folds
 
 au BufRead /tmp/mutt-*          set ft=mail
 au BufRead /tmp/mutt-*          set invhls
-au BufRead /tmp/mutt-*          set textwidth=72
+"au BufRead /tmp/mutt-*          set textwidth=72
+au BufRead /tmp/mutt-*          set textwidth=0
+au BufRead /tmp/mutt-*          setlocal fo+=aw
 au BufRead /tmp/mutt-*          set spelllang=en,fr
 au BufRead /tmp/mutt-*          set spell
 au BufRead /tmp/mutt-*          normal zR
