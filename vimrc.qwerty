@@ -18,8 +18,10 @@ map  & {v}! par 72j<CR>
 nmap  <Tab> <C-w>w
 
 " Toggle spelling (and spell language choice)
-map  <leader>se :setlocal spell! spelllang=en<CR>
-map  <leader>sf :setlocal spell! spelllang=fr<CR>
+"map  <leader>se :setlocal spell! spelllang=en<CR>
+"map  <leader>sf :setlocal spell! spelllang=fr<CR>
+nmap <leader>se :echo ToggleSpell("en_gb")<CR>
+nmap <leader>sf :echo ToggleSpell("fr")<CR>
 
 " Toggle highlight search
 map  <Space> :set invhls<CR>

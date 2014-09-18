@@ -105,6 +105,75 @@ set foldmethod=syntax                       " use syntax to define folds
 
 "}}}
 
+""""""""""""""""""""{{{ ADDITIONAL CUSTOM FUNCTIONS
+
+""" FocusMode
+function! ToggleFocusMode()
+  if (&foldcolumn != 12)
+    set laststatus=0
+    set numberwidth=10
+    set foldcolumn=12
+    set noruler
+    hi FoldColumn ctermbg=none
+    hi LineNr ctermfg=0 ctermbg=none
+    hi NonText ctermfg=0
+    hi CursorLineNr ctermfg=0 ctermbg=none
+  else
+    set laststatus=2
+    set numberwidth=4
+    set foldcolumn=0
+    set ruler
+    execute 'colorscheme ' . g:colors_name
+  endif
+endfunc
+
+""" Allow/disallow textwidth formating
+function! ToggleTextwidthMode()
+  if (&textwidth != 80)
+    set textwidth=80
+  else
+    set textwidth=0
+  endif
+endfunc
+
+""" Switch between tab value
+function! SwitchTabValue()
+  if (&softtabstop == 4 || &tabstop == 4 || &shiftwidth == 4)
+    set softtabstop=2 tabstop=2 shiftwidth=2
+  else
+    set softtabstop=4 tabstop=4 shiftwidth=4
+  endif
+endfunc
+
+" Toggle spell with a language
+" (work around for spellcheck with vundle...)
+function! ToggleSpell(lang)
+    if !exists("b:old_spelllang")
+        let b:old_spelllang = &spelllang
+        let b:old_spellfile = &spellfile
+        let b:old_dictionary = &dictionary
+    endif
+
+    let l:newMode = ""
+    if !&l:spell || a:lang != &l:spelllang
+        setlocal spell
+        let l:newMode = "spell"
+        execute "setlocal spelllang=" . a:lang
+        execute "setlocal spellfile=" . "~/.vim/spell/" . matchstr(a:lang, "[a-zA-Z][a-zA-Z]") . "." . &encoding . ".add"
+        execute "setlocal dictionary=" . "~/.vim/spell/" . a:lang . "." . &encoding . ".dic"
+        let l:newMode .= ", " . a:lang
+    else
+        setlocal nospell
+        let l:newMode = "nospell"
+        execute "setlocal spelllang=" . b:old_spelllang
+        execute "setlocal spellfile=" . b:old_spellfile
+        execute "setlocal dictionary=" . b:old_dictionary
+    endif
+    return l:newMode
+endfunction
+
+"}}}
+
 """"""""""""""""""""{{{ FILES SPECIFIC
 
 au BufRead /tmp/mutt-*          set ft=mail
@@ -116,19 +185,44 @@ au BufRead /tmp/mutt-*          set spelllang=en,fr
 au BufRead /tmp/mutt-*          set spell
 au BufRead /tmp/mutt-*          normal zR
 
+au BufRead,BufNewFile *.jsm     setfiletype javascript
+au BufRead,BufNewFile *.xul     setfiletype xml
+au BufRead *.stl so $VIMRUNTIME/syntax/html.vim
 au BufNewFile *.html 0r ~/.vim/templates/html.txt
-au BufRead,BufNewFile *.jsm setfiletype javascript
-au BufRead,BufNewFile *.xul setfiletype xml
-au filetype html,xml            set listchars-=tab:>.
+au Filetype html,xhtml,xml      set listchars-=tab:>.
+au Filetype html,xhtml,xml      set foldmethod=marker
+au Filetype html,xhtml,xml      set textwidth=0
+au FileType html,xhtml,xml      set shiftwidth=2
+au FileType html,xhtml,xml      set tabstop=2
+au FileType html,xhtml,xml      set softtabstop=2
+au FileType xhtml,html,xml      setlocal expandtab " (et) expand tabs to spaces (use :retab to redo entire file)
 
-au BufRead,BufNewFile *.md      set syntax=rst
+au FileType tex                 set shiftwidth=2
+au FileType tex                 set tabstop=2
+au FileType tex                 set softtabstop=2
+
+au FileType python              set shiftwidth=4
+au FileType python              set tabstop=4
+au FileType python              set softtabstop=4
+au FileType python setlocal expandtab " (et) expand tabs to spaces (use :retab to redo entire file)
+
 au BufRead,BufNewFile *.ecl     set syntax=prolog
-au BufRead,BufNewFile *.ins     set syntax=tex
-
+au BufRead,BufNewFile *.ins     set textwidth=0
+au BufNewFile,BufRead *.ins     setlocal syntax=tex
 au BufRead,BufNewFile *.ability set syntax=c
 au BufRead,BufNewFile *.task    set syntax=c
-
 au BufRead,BufNewFile *.zsh-theme    set syntax=zsh
+
+au BufRead,BufNewFile *.md      set syntax=rst
+au BufNewFile,BufRead *.rst     so $VIMRUNTIME/syntax/rst.vim
+au BufNewFile,BufRead *.rst,*.tex call ToggleSpell("en_gb")
+
+au BufNewFile,BufRead *.mod,*.data setlocal syntax=gmpl
+
+au FileType c,h,java,js setlocal mps+==:;   " allow the match pairs operation (%) to work with '=' and ';'
+au FileType c,h         setlocal cindent    " enable the intelligent cindent (cin) feature for the following files
+au FileType java,js setlocal smartindent                    " enable the smartindenting (si) feature for the following files
+
 
 " when opening a file, jump to the last known cursor position
 autocmd BufReadPost *
@@ -136,79 +230,37 @@ autocmd BufReadPost *
           \   exe "normal g`\"" |
   \ endif
 
-"filetype plugin indent on "Detection to determine the type of the current file
+"Completion
+au FileType python let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+au FileType python let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
-au BufRead *.stl so $VIMRUNTIME/syntax/html.vim
-au BufNewFile,BufRead *.rst so $VIMRUNTIME/syntax/rst.vim
-au BufNewFile,BufRead *.rst setlocal spell spelllang=en,fr
-au BufRead,BufNewFile *.tex setlocal spell spelllang=en,fr
-
-"let g:languagetool_jar=$HOME . '/Program/LanguageTool/LanguageTool.jar'
-"
-"Completion Python
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-:au BufWinEnter *.py let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
-:au BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-
-autocmd filetype html set omnifunc=htmlcomplete#CompleteTags
-autocmd filetype css set omnifunc=csscomplete#CompleteCSS
-au filetype javascript set omnifunc=javascriptcomplete#CompleteJS
-au filetype c set omnifunc=ccomplete#Complete
-au filetype php set omnifunc=phpcomplete#CompletePHP
-au filetype ruby set omnifunc=rubycomplete#Complete
-au filetype sql set omnifunc=sqlcomplete#Complete
-au filetype xml set omnifunc=xmlcomplete#CompleteTags
-
-autocmd FileType html set shiftwidth=2 "Défini 2 espace comme taille d'indentation
-autocmd FileType html set tabstop=2 "Défini 2 espace comme taille d'indentation
-autocmd FileType html set softtabstop=2 "Nombre d'espaces qu'un <Tab> ou <RetArr> représentent
-
-autocmd FileType tex set shiftwidth=2 "Défini 2 espace comme taille d'indentation
-autocmd FileType tex set tabstop=2 "Défini 2 espace comme taille d'indentation
-autocmd FileType tex set softtabstop=2 "Nombre d'espaces qu'un <Tab> ou <RetArr> représentent
+au FileType python      set omnifunc=pythoncomplete#Complete
+au Filetype html        set omnifunc=htmlcomplete#CompleteTags
+au Filetype css         set omnifunc=csscomplete#CompleteCSS
+au Filetype javascript  set omnifunc=javascriptcomplete#CompleteJS
+au Filetype c           set omnifunc=ccomplete#Complete
+au Filetype php         set omnifunc=phpcomplete#CompletePHP
+au Filetype ruby        set omnifunc=rubycomplete#Complete
+au Filetype sql         set omnifunc=sqlcomplete#Complete
+au Filetype xml         set omnifunc=xmlcomplete#CompleteTags
 
 "Surligne les espaces de fin de ligne
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
-" Supprime automatiquement les espaces de fin de ligne
+
+" Delete trailing white space
 "autocmd BufWritePre * :%s/\s\+$//e
-autocmd BufWritePre *.py :%s/\s\+$//e
+"autocmd BufWritePre *.py :%s/\s\+$//e
+function! DeleteTrailingWS()
+  execute "normal mz"
+  %s/\s\+$//ge
+  execute "normal `z"
+endfunc
 
-au FileType xhtml,html,htmhp,xml setlocal tabstop=2
-au FileType xhtml,html,htmhp,xml setlocal shiftwidth=2
-au FileType xhtml,html,htmhp,xml setlocal expandtab      " (et) expand tabs to spaces (use :retab to redo entire file)
-au FileType xhtml,html,htmhp,xml setlocal softtabstop=2   " (sts) makes spaces feel like tabs (like deleting)
-
-au FileType c,h,java,js setlocal mps+==:;                   " allow the match pairs operation (%) to work with '=' and ';'
-"
-au FileType c,h setlocal cindent                            " enable the intelligent cindent (cin) feature for the following files
-au FileType java,js setlocal smartindent                    " enable the smartindenting (si) feature for the following files
-
-au FileType txt setlocal fo+=tn
+" Delete trailing white space on save for some specific files
+autocmd FileType c,cpp,python,prolog,tex autocmd BufWrite :call DeleteTrailingWS()
 
 "}}}
-
-""""""""""""""""""""{{{ MISCELLANEOUS SETTINGS
-"" (dict) dictionary used for keyword completion
-"" to use: while in insertion mode and in the middle of a word, type <ctrl-n> and <ctrl-p>
-"set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
-"set complete-=k complete+=k
-"
-"" (tsr) thesaurus used for keyword completion
-"" to use: while in insertion mode and at the BEGINNING of a word, type <ctrl-x> then <ctrl-n>
-""set thesaurus-=/usr/share/dict/mobythes.aur thesaurus+=/usr/share/dict/mobythes.aur
-""set complete-=k complete+=k
-
-"}}}
-"
-" Spell shortcuts (memo)
-"   To move to a misspelled word, use ]s and [s.
-"   z= will suggest a list of alternatives that may be correct.
-"   Just hit Enter if none of the suggestions work, or enter the number for the correct word.
-"   Use zg to add the word to the dictionary. 
-"   You can also mark words as incorrect using zw.
-"
-" For auto-completion use CTRL-p and CTRL-n
 
 """"""""""""""""""""{{{ VIM MODES DISPLAY and SETTINGS
 
@@ -271,56 +323,18 @@ let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
 "}}}
 
-""""""""""""""""""""{{{ CUSTOM FUNCTIONS
+""""""""""""""""""""{{{ ABBREVIATIONS
+:autocmd FileType python     :iabbrev <buffer> iff if:<left>
 
-""" FocusMode
-function! ToggleFocusMode()
-  if (&foldcolumn != 12)
-    set laststatus=0
-    set numberwidth=10
-    set foldcolumn=12
-    set noruler
-    hi FoldColumn ctermbg=none
-    hi LineNr ctermfg=0 ctermbg=none
-    hi NonText ctermfg=0
-    hi CursorLineNr ctermfg=0 ctermbg=none
-  else
-    set laststatus=2
-    set numberwidth=4
-    set foldcolumn=0
-    set ruler
-    execute 'colorscheme ' . g:colors_name
-  endif
-endfunc
+:autocmd FileType c          :iabbrev <buffer> #i #include
+:autocmd FileType c          :iabbrev <buffer> #d #define
 
-""" Allow/disallow textwidth formating
-function! ToggleTextwidthMode()
-  if (&textwidth != 80)
-    set textwidth=80
-  else
-    set textwidth=0
-  endif
-endfunc
+:autocmd FileType html       :iabbrev <buffer> <a <a href=""></a><left><left><left><left><left>
+:autocmd FileType html       :iabbrev <buffer> <i <img src="" /><left><left><left>
 
-""" Switch between tab value
-function! SwitchTabValue()
-  if (&softtabstop == 4 || &tabstop == 4 || &shiftwidth == 4)
-    set softtabstop=2 tabstop=2 shiftwidth=2
-  else
-    set softtabstop=4 tabstop=4 shiftwidth=4
-  endif
-endfunc
+:autocmd FileType php        :iabbrev <buffer> <i <img src="" /><left><left><left>
 
-" Delete trailing white space
-function! DeleteTrailingWS()
-  execute "normal mz"
-  %s/\s\+$//ge
-  execute "normal `z"
-endfunc
-
-" Delete trailing white space on save for some specific files
-autocmd BufWrite *.py,*.tex,*.bib :call DeleteTrailingWS()
-autocmd FileType c,cpp,python,prolog autocmd BufWrite :call DeleteTrailingWS()
+:autocmd FileType javascript :iabbrev <buffer> <? <?php?><left><left>
 
 "}}}
 
@@ -379,19 +393,6 @@ autocmd FileType c,cpp,python,prolog autocmd BufWrite :call DeleteTrailingWS()
 
 "}}}
 
-""""""""""""""""""""{{{ ABBREVIATIONS
-abbreviate #i #include
-abbreviate #d #define
-
-abbreviate <a <a href=""></a><left><left><left><left><left>
-abbreviate <i <img src="" /><left><left><left>
-
-abbreviate "" &quot;&quot;<left><left><left><left><left>
-
-abbreviate <? <?php?><left><left>
-
-"}}}
-
 """"""""""""""""""""{{{ COMMAND REFERENCES
 
 " *                     - searches for word under cursor
@@ -402,7 +403,7 @@ abbreviate <? <?php?><left><left>
 " ~                     - changes case of character
 " :r !<cmd>             - reads the output of the shell <cmd> into the file
 
-" :% s/hello/A/gc       - typical search and replace command
+" :% s/hello/A/gc       - typical search and replace command (ask for confirmation)
 " :% !tidy              - runs the code through the 'tidy' program
 
 " za        - fold toggle   toggles between open/closed fold (zA does it recursively)
@@ -411,6 +412,11 @@ abbreviate <? <?php?><left><left>
 " zo        - fold open     (zO is recursive)
 " zm        - fold more     increases foldlevel by 1 (zM opens all folds)
 " zr        - fold reduce   decreses foldlevel by 1 (zR closes all folds
+"
+" z=        spell
+" zg/zw     mark as good/wrong (add)
+" zug/zuw   undo marking
+" zG/zW     mark as good/wrong, for the session
 
 " Native alternative to <ESC> : <CTRL + C >
 
@@ -427,16 +433,14 @@ abbreviate <? <?php?><left><left>
 "}}}
 
 """"""""""""""""""""{{{ KEYBINDINGS (includings plugins) AND ALIAS
-"source ~/.vim/vimrc.qwerty
+" Default (choose one, comment other)
 source ~/.vim/vimrc.bepo
+au filetype rst execute "source ~/.vim/alias/bepo/rst.vim"
+au filetype tex execute "source ~/.vim/alias/bebo/tex.vim"
 
-" Alias (depends on the keybindings)
-" One may want to use the ".vim/syntax/" system instead :
-" the following work-around enable alias for multiple keyboard layouts
-au filetype rst execute "source ~/.vim/alias/".my_layout."/rst.vim"
-au filetype tex execute "source ~/.vim/alias/".my_layout."/tex.vim"
-
-
+"source ~/.vim/vimrc.qwerty
+"au filetype rst execute "source ~/.vim/alias/qwerty/rst.vim"
+"au filetype tex execute "source ~/.vim/alias/qwerty/tex.vim"
 
 "}}}
 
