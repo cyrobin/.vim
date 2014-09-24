@@ -434,13 +434,13 @@ let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
 """"""""""""""""""""{{{ KEYBINDINGS (includings plugins) AND ALIAS
 " Default (choose one, comment other)
-source ~/.vim/vimrc.bepo
-au filetype rst execute "source ~/.vim/alias/bepo/rst.vim"
-au filetype tex execute "source ~/.vim/alias/bebo/tex.vim"
+"source ~/.vim/vimrc.bepo
+"au filetype rst execute "source ~/.vim/alias/bepo/rst.vim"
+"au filetype tex execute "source ~/.vim/alias/bebo/tex.vim"
 
-"source ~/.vim/vimrc.qwerty
-"au filetype rst execute "source ~/.vim/alias/qwerty/rst.vim"
-"au filetype tex execute "source ~/.vim/alias/qwerty/tex.vim"
+source ~/.vim/vimrc.qwerty
+au filetype rst execute "source ~/.vim/alias/qwerty/rst.vim"
+au filetype tex execute "source ~/.vim/alias/qwerty/tex.vim"
 
 "}}}
 
