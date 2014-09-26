@@ -155,11 +155,11 @@ cmap é!! w !sudo tee % >/dev/null
 " (Note that CTRL+C is also a native alternative)
 inoremap tsr <ESC>
 
-"" Smart way to move between windows
-"jkmap <C-c> <C-W>j
-"jkmap <C-t> <C-W>k
-"jkmap <C-s> <C-W>h
-"jkmap <C-r> <C-W>l
+" Smart way to move between windows
+map <C-c> <C-W>j
+map <C-t> <C-W>k
+map <C-s> <C-W>h
+map <C-r> <C-W>l
 
 " Ease long inner navigation (move half-screen up or down)
 noremap <C-S-t> <C-U>
