@@ -187,20 +187,23 @@ nmap  <leader>cd :lcd %:h
 " Toggle displayed text wrapping
 map <leader>sw :set wrap!<cr>
 
+" « v,uo » lance firefox avec l'url courante
+vmap <leader>uo :<C-U>!firefox "<cfile>" >& /dev/null<CR><CR>
+" « v,ud » et « v,us » lancent firefox et une recherche (définition ou synonyme) dans le tlfi sur le mot courant
+vmap <leader>ud :<C-U>!firefox "http://www.cnrtl.fr/lexicographie/<cword>" >& /dev/null<CR><CR>
+vmap <leader>us :<C-U>!firefox "http://www.cnrtl.fr/synonymie/<cword>" >& /dev/null<CR><CR>
+" « v,ug » comme ci-dessus mais pour google
+vmap <leader>ug :<C-U>!firefox "http://www.google.fr/search?hl=fr&q=<cword>&btnG=Recherche+Google&meta=" >& /dev/null<CR><CR>
+" « v,uw » comme ci-dessus mais pour wikipedia
+vmap <leader>uw :<C-U>!firefox "http://fr.wikipedia.org/wiki/<cword>" >& /dev/null<CR><CR>
+" « v,uc » comme ci-dessus mais pour le conjugueur
+vmap <leader>uc :<C-U>!firefox "http://www.leconjugueur.com/php5/index.php?v=<cword>" >& /dev/null<CR><CR>
+" « v,ut » comme ci-dessus mais pour le conjugueur
+vmap <leader>ut :<C-U>!firefox "https://translate.google.com/#en/fr/<cword>" >& /dev/null<CR><CR>
+
 " Map to insert python debugger
 map  <F10> <Esc>import pdb;pdb.set_trace()<CR><Esc>
 
-" Open current url in iceweasel
-vmap <leader>o :<C-U>!iceweasel "<cfile>" >& /dev/null<CR><CR>
-"" « v,d » et « v,s » lancent firefox et une recherche (définition ou synonyme) dans le tlfi sur le mot courant
-"vmap ,d :<C-U>!firefox "http://www.cnrtl.fr/lexicographie/<cword>" >& /dev/null<CR><CR>
-"vmap ,s :<C-U>!firefox "http://www.cnrtl.fr/synonymie/<cword>" >& /dev/null<CR><CR>
-"" « v,g » comme ci-dessus mais pour google
-"vmap ,g :<C-U>!firefox "http://www.google.fr/search?hl=fr&q=<cword>&btnG=Recherche+Google&meta=" >& /dev/null<CR><CR>
-""« v,w » comme ci-dessus mais pour wikipedia
-"vmap ,w :<C-U>!firefox "http://fr.wikipedia.org/wiki/<cword>" >& /dev/null<CR><CR>
-"" « v,c » comme ci-dessus mais pour le conjugueur
-"vmap ,c :<C-U>!firefox "http://www.leconjugueur.com/php5/index.php?v=<cword>" >& /dev/null<CR><CR>
 "}}}
 
 """"""""""""""""""""{{{ CUSTOM FUNCTIONS KEYBINDINGS
