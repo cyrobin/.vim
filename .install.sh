@@ -37,11 +37,4 @@ vim +BundleInstall +qall
 #cd ~/.vim/bundle/YouCompleteMe
 #./install.sh --clang-completer
 
-# Install fonts
-echo "Patch font for Powerline. You might need to install 'python-fontforge'."
-mkdir -p ~/.fonts
-cd ~/.fonts
-echo "Patch DejaVu in ~/.fonts you migh need to install 'ttf-dejavu-core'."
-~/.vim/bundle/vim-powerline/fontpatcher/fontpatcher /usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf
-
 echo "Done."
