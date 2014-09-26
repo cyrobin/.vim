@@ -266,6 +266,13 @@ map .r <Plug>(easymotion-lineforward)
 " Jedi's jump to definition/declaration feature
 " nnoremap <leader>e :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+""" Surround
+" http://vimawesome.com/plugin/surround-vim
+" change: cs"' or cs'<q> or cst" or ...
+" add:  ysiw]  or ysiw<em> or ...
+" delete: ds" or ds{ds) or ...
+" visual mode (line): V then S<p class="important">
+
 "}}}
 
 """"""""""""""""""""{{{ COMMAND REFERENCES
