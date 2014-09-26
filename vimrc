@@ -245,15 +245,15 @@ autocmd BufReadPost *
 au FileType python let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
 au FileType python let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
-au FileType python      set omnifunc=pythoncomplete#Complete
-au Filetype html        set omnifunc=htmlcomplete#CompleteTags
-au Filetype css         set omnifunc=csscomplete#CompleteCSS
-au Filetype javascript  set omnifunc=javascriptcomplete#CompleteJS
-au Filetype c           set omnifunc=ccomplete#Complete
-au Filetype php         set omnifunc=phpcomplete#CompletePHP
-au Filetype ruby        set omnifunc=rubycomplete#Complete
-au Filetype sql         set omnifunc=sqlcomplete#Complete
-au Filetype xml         set omnifunc=xmlcomplete#CompleteTags
+au FileType python          setlocal omnifunc=pythoncomplete#Complete
+au Filetype html,markdown   setlocal omnifunc=htmlcomplete#CompleteTags
+au Filetype css             setlocal omnifunc=csscomplete#CompleteCSS
+au Filetype javascript      setlocal omnifunc=javascriptcomplete#CompleteJS
+au Filetype c               setlocal omnifunc=ccomplete#Complete
+au Filetype php             setlocal omnifunc=phpcomplete#CompletePHP
+au Filetype ruby            setlocal omnifunc=rubycomplete#Complete
+au Filetype sql             setlocal omnifunc=sqlcomplete#Complete
+au Filetype xml             setlocal omnifunc=xmlcomplete#CompleteTags
 
 "Surligne les espaces de fin de ligne
 highlight WhitespaceEOL ctermbg=red guibg=red
