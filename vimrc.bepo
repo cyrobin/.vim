@@ -202,6 +202,7 @@ vmap <leader>uc :<C-U>!firefox "http://www.leconjugueur.com/php5/index.php?v=<cw
 vmap <leader>ut :<C-U>!firefox "https://translate.google.com/#en/fr/<cword>" >& /dev/null<CR><CR>
 
 " Map to insert python debugger
+map  <leader>pdb <Esc>import pdb;pdb.set_trace()<CR><Esc>
 map  <F10> <Esc>import pdb;pdb.set_trace()<CR><Esc>
 
 "}}}
