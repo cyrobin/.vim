@@ -8,26 +8,37 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " colortheme
 Bundle 'tomasr/molokai'
+" nice tab and bottom lines
+Bundle 'bling/vim-airline'
+" git and other cvs info in the file
+Bundle 'mhinz/vim-signify'
+" useful snippets
+Bundle 'msanders/snipmate.vim'
+" allows to configure % to match more than just single characters
+" latest version (more recent than the standard vim distribution one)
+Bundle 'vim-scripts/matchit.zip'
+" cache Comletion
+Bundle 'Shougo/neocomplete'
+" 'parenthesis' and other surrounding stuff
+Bundle 'tpope/vim-surround'
+" allow repeat '.' with plugins
+Bundle 'tpope/vim-repeat'
+" comment/uncomment large amount of code
+Bundle 'vim-scripts/The-NERD-Commenter'
+" file tree
+Bundle 'vim-scripts/The-NERD-tree'
+" easymotion
+Bundle 'Lokaltog/vim-easymotion'
 " Python completion - incompatible with YCM
 Bundle 'davidhalter/jedi-vim'
 " C/C++/Python Completion - incompatible with jedi-vim
 " require the last version of vim...
 "Bundle 'Valloric/YouCompleteMe'
-" fancy powerline (bottom)
-Bundle 'Lokaltog/vim-powerline'
-" git info in the file
-Bundle 'airblade/vim-gitgutter'
-" ???
-Bundle 'msanders/snipmate.vim'
-" match parenthesis
-Bundle 'vim-scripts/matchit.zip'
-" comment/uncomment large amount of code
-Bundle 'vim-scripts/The-NERD-Commenter'
-" file tree
-Bundle 'vim-scripts/The-NERD-tree'
 " interesting features for rst files
 "Bundle 'Rykka/riv.vim'
-
+" Code overview (= Minimap)
+" TODO make it useful...
+"Bundle 'severin-lemaignan/vim-minimap'
 "}}}
 
 """"""""""""""""""""{{{ GLOBAL
@@ -393,42 +404,40 @@ let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
 "}}}
 
-""""""""""""""""""""{{{ COMMAND REFERENCES
 
-" *                     - searches for word under cursor
-" gd                    - finds definition of variable/function under cursor
-" ga                    - prints the ascii value of character under cursor
-" gf                    - opens file under the cursor (in split view)
-" gi                    - goes to insert mode in the same spot as you last inserted
-" ~                     - changes case of character
-" :r !<cmd>             - reads the output of the shell <cmd> into the file
+""""""""""""""""""""{{{ PLUGINS
 
-" :% s/hello/A/gc       - typical search and replace command (ask for confirmation)
-" :% !tidy              - runs the code through the 'tidy' program
+""" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline_theme = 'badwolf'
+let g:airline_theme = 'powerlineish'
 
-" za        - fold toggle   toggles between open/closed fold (zA does it recursively)
-" zf        - create/define a fold (compatible with motion or visual mode)
-" zc        - fold close    (zC is recursive)
-" zo        - fold open     (zO is recursive)
-" zm        - fold more     increases foldlevel by 1 (zM opens all folds)
-" zr        - fold reduce   decreses foldlevel by 1 (zR closes all folds
-"
-" z=        spell
-" zg/zw     mark as good/wrong (add)
-" zug/zuw   undo marking
-" zG/zW     mark as good/wrong, for the session
+""" Map for NerdCommenter
+"use defaut mapping: <leader>c<space> to toggle comments both normal and visual)
 
-" Native alternative to <ESC> : <CTRL + C >
+""" NerdTree
+let NERDChristmasTree = 1
+let NERDTreeSortOrder = ['\/$', '\.py$', '\.cpp$', '\.c$', '\.hpp$', '\.h$', '*']
 
-" * register refers to the system clipboard
-" e.g. :    copy   "*dd    or  1G"*yG
-"           paste  "*dd    or  1G"*yG
+""" EasyMotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
 
-" +2yy      - copy two lines to X11 clipboard
-" +dd       - cut line to X11 clipboard
-" +p        - paste X11 clipboard
+""" Signify (Sy)
+" highlight signs in Signify (Sy)
+highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=160
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
-" see also  set clipboard=unnamed
+" highlight lines in Signify (Sy) and vimdiff etc.
+" TODO
+"highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
+"highlight DiffDelete        cterm=bold ctermbg=none ctermfg=160
+"highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
+
 
 "}}}
 
@@ -443,4 +452,11 @@ au filetype rst execute "source ~/.vim/alias/qwerty/rst.vim"
 au filetype tex execute "source ~/.vim/alias/qwerty/tex.vim"
 
 "}}}
+
+
+""""""""""""""""""""{{{ TODO Minimap
+" TODO: link with easymotion !
+"command! Minimap call minimap#ShowMinimap()
+"nnoremap m :Minimap<CR>
+"
 

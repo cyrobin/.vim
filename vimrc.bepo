@@ -206,42 +206,6 @@ vmap <leader>o :<C-U>!iceweasel "<cfile>" >& /dev/null<CR><CR>
 "vmap ,c :<C-U>!firefox "http://www.leconjugueur.com/php5/index.php?v=<cword>" >& /dev/null<CR><CR>
 "}}}
 
-""""""""""""""""""""{{{ PLUGINS
-
-let g:Powerline_symbols = 'fancy'
-
-" Map for NerdCommenter
-map  <leader>ct <leader>c<space>
-vmap <leader>ct <leader>c<space>
-
-" Params and Map for NerdTree
-let NERDChristmasTree = 1
-let NERDTreeSortOrder = ['\/$', '\.py$', '\.cpp$', '\.c$', '\.hpp$', '\.h$', '*']
-nmap k :NERDTreeToggle<cr>
-let NERDTreeMapOpenInTab='h'
-let NERDTreeMapOpenInTabSilent='H'
-let NERDTreeMapOpenVSplit='<C-v>'
-let NERDTreeMapJumpFirstChild='S'
-let NERDTreeMapJumpLastChild='T'
-let NERDTreeMapJumpNextSibling='<C-T>'
-let NERDTreeMapJumpPrevSibling='<C-S>'
-"let NERDTreeMapChdir='L'
-"let NERDTreeMapRefresh='j'
-"let NERDTreeMapRefreshRoot='J'
-
-""" Jedi disable auto completion popup
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#show_call_signatures = "0"
-
-" YouCompleteMe
-" disables auto closing of the preview window when the user accepts the offered
-" completion string
-"let g:ycm_autoclose_preview_window_after_completion=1
-" Jedi's jump to definition/declaration feature
-" nnoremap <leader>e :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-"}}}
-
 """"""""""""""""""""{{{ CUSTOM FUNCTIONS KEYBINDINGS
 :command -nargs=+ Find vimgrep <args>|cw
 
@@ -263,3 +227,81 @@ nnoremap <leader>cws :call DeleteTrailingWS()<cr>
 
 "}}}
 
+""""""""""""""""""""{{{ PLUGINS
+
+""" NerdTree
+nmap k :NERDTreeToggle<cr>
+nmap <C-b> :NERDTreeToggle<cr>
+let NERDTrheMapOpenInTab='h'
+let NERDTreeMapOpenInTabSilent='H'
+let NERDTreeMapOpenVSplit='<C-v>'
+let NERDTreeMapJumpFirstChild='S'
+let NERDTreeMapJumpLastChild='T'
+let NERDTreeMapJumpNextSibling='<C-T>'
+let NERDTreeMapJumpPrevSibling='<C-S>'
+"let NERDTreeMapChdir='L'
+"let NERDTreeMapRefresh='j'
+"let NERDTreeMapRefreshRoot='J'
+
+""" EasyMotion
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `j{char}{char}{label}`
+nmap j <Plug>(easymotion-s2)
+" JK motions: Line motions
+map .c <Plug>(easymotion-linebackward)
+map .t <Plug>(easymotion-j)
+map .s <Plug>(easymotion-k)
+map .r <Plug>(easymotion-lineforward)
+
+""" Jedi disable auto completion popup
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#show_call_signatures = "0"
+
+""" YouCompleteMe
+" disables auto closing of the preview window when the user accepts the offered
+" completion string
+"let g:ycm_autoclose_preview_window_after_completion=1
+" Jedi's jump to definition/declaration feature
+" nnoremap <leader>e :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"}}}
+
+""""""""""""""""""""{{{ COMMAND REFERENCES
+
+" *                     - searches for word under cursor
+" gd                    - finds definition of variable/function under cursor
+" ga                    - prints the ascii value of character under cursor
+" gf                    - opens file under the cursor (in split view)
+" gi                    - goes to insert mode in the same spot as you last inserted
+" ~                     - changes case of character
+" :r !<cmd>             - reads the output of the shell <cmd> into the file
+
+" :% s/hello/A/gc       - typical search and replace command (ask for confirmation)
+" :% !tidy              - runs the code through the 'tidy' program
+
+" za        - fold toggle   toggles between open/closed fold (zA does it recursively)
+" zf        - create/define a fold (compatible with motion or visual mode)
+" zc        - fold close    (zC is recursive)
+" zo        - fold open     (zO is recursive)
+" zm        - fold more     increases foldlevel by 1 (zM opens all folds)
+" zr        - fold reduce   decreses foldlevel by 1 (zR closes all folds
+"
+" z=        spell
+" zg/zw     mark as good/wrong (add)
+" zug/zuw   undo marking
+" zG/zW     mark as good/wrong, for the session
+
+" Native alternative to <ESC> : <CTRL + C >
+
+" * register refers to the system clipboard
+" e.g. :    copy   "*dd    or  1G"*yG
+"           paste  "*dd    or  1G"*yG
+
+" +2yy      - copy two lines to X11 clipboard
+" +dd       - cut line to X11 clipboard
+" +p        - paste X11 clipboard
+
+" see also  set clipboard=unnamed
+
+"}}}
