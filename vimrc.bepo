@@ -173,16 +173,13 @@ vmap <M-t> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-s> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " Useful mappings for managing tabs
-nnoremap <leader>tn :tabnew<cr>
-nnoremap <leader>te :tabe .<cr>
-nnoremap <leader>tt :tabe ./
-nnoremap <leader>to :tabonly<cr>
-nnoremap <leader>tc :tabclose<cr>
-nnoremap <leader>tm :tabmove
-
+nnoremap <leader>n :tabnew<cr>
+nnoremap <leader>e :tabe .<cr>
+nnoremap <leader>o :tabe ./
+nnoremap <leader>m :tabmove
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-nmap <leader>th :tabedit <c-r>=expand("%:p:h")<cr>/
+nnoremap <leader>h :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " cd to the directory containing the file in the buffer
 nmap  <leader>cd :lcd %:h
