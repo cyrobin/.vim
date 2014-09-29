@@ -272,6 +272,7 @@ map .r <Plug>(easymotion-lineforward)
 " add:  ysiw]  or ysiw<em> or ...
 " delete: ds" or ds{ds) or ...
 " visual mode (line): V then S<p class="important">
+" TODO Change mapping (conflicting with "ctsr" in bepo)
 
 "}}}
 

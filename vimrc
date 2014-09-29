@@ -20,7 +20,7 @@ Bundle 'vim-scripts/matchit.zip'
 " cache Comletion
 Bundle 'Shougo/neocomplete'
 " 'parenthesis' and other surrounding stuff
-Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-surround'
 " allow repeat '.' with plugins
 Bundle 'tpope/vim-repeat'
 " comment/uncomment large amount of code
