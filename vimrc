@@ -5,40 +5,40 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " require to handle other plugins
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 " colortheme
-Bundle 'tomasr/molokai'
+Plugin 'tomasr/molokai'
 " nice tab and bottom lines
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 " git and other cvs info in the file
-Bundle 'mhinz/vim-signify'
+Plugin 'mhinz/vim-signify'
 " useful snippets
-Bundle 'msanders/snipmate.vim'
+Plugin 'msanders/snipmate.vim'
 " allows to configure % to match more than just single characters
 " latest version (more recent than the standard vim distribution one)
-Bundle 'vim-scripts/matchit.zip'
+Plugin 'vim-scripts/matchit.zip'
 " cache Comletion
-Bundle 'Shougo/neocomplete'
+Plugin 'Shougo/neocomplete'
 " 'parenthesis' and other surrounding stuff
-"Bundle 'tpope/vim-surround'
+"Plugin 'tpope/vim-surround'
 " allow repeat '.' with plugins
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 " comment/uncomment large amount of code
-Bundle 'vim-scripts/The-NERD-Commenter'
+Plugin 'vim-scripts/The-NERD-Commenter'
 " file tree
-Bundle 'vim-scripts/The-NERD-tree'
+Plugin 'vim-scripts/The-NERD-tree'
 " easymotion
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'Lokaltog/vim-easymotion'
 " Python completion - incompatible with YCM
-Bundle 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 " C/C++/Python Completion - incompatible with jedi-vim
 " require the last version of vim...
-"Bundle 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 " interesting features for rst files
-"Bundle 'Rykka/riv.vim'
+"Plugin 'Rykka/riv.vim'
 " Code overview (= Minimap)
 " TODO make it useful...
-"Bundle 'severin-lemaignan/vim-minimap'
+"Plugin 'severin-lemaignan/vim-minimap'
 "}}}
 
 """"""""""""""""""""{{{ GLOBAL
