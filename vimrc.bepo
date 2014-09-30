@@ -255,9 +255,14 @@ map .t <Plug>(easymotion-j)
 map .s <Plug>(easymotion-k)
 map .r <Plug>(easymotion-lineforward)
 
-""" Jedi disable auto completion popup
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#show_call_signatures = "0"
+""" Jedi
+" Below are default shorcuts
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_definitions_command = "<leader>d"
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
 
 """ YouCompleteMe
 " disables auto closing of the preview window when the user accepts the offered
