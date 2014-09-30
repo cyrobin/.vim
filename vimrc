@@ -32,7 +32,7 @@ Plugin 'Lokaltog/vim-easymotion'
 " Python completion - incompatible with YCM
 Plugin 'davidhalter/jedi-vim'
 " C/C++/Python Completion - incompatible with jedi-vim
-" require the last version of vim...
+" require the last version of vim
 "Plugin 'Valloric/YouCompleteMe'
 " interesting features for rst files
 "Plugin 'Rykka/riv.vim'
@@ -245,7 +245,8 @@ autocmd BufReadPost *
 au FileType python let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
 au FileType python let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
-au FileType python          setlocal omnifunc=pythoncomplete#Complete
+"au FileType python          setlocal omnifunc=pythoncomplete#Complete
+au FileType python          setlocal omnifunc=jedi#completions
 au Filetype html,markdown   setlocal omnifunc=htmlcomplete#CompleteTags
 au Filetype css             setlocal omnifunc=csscomplete#CompleteCSS
 au Filetype javascript      setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -481,21 +482,25 @@ function! s:my_cr_function()
 endfunction
 
 " Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+inoremap <expr><TAB>  pumvisible() ? neocomplete#close_popup() : "\<TAB>"
+
+""" Jedi completion module
+"let g:jedi#auto_initialization = 1
+"let g:jedi#auto_vim_configuration = 1
+"let g:jedi#use_tabs_not_buffers = 1
+"let g:jedi#use_splits_not_buffers = "left"
+"This options could be "left", "right", "top" or "bottom". It will decide the direction where the split open.
+"
+"Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
+"let g:jedi#popup_on_dot = 0
+" 'light' popup display (disable function call signature)
+"let g:jedi#show_call_signatures = "0"
+"Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
+"let g:jedi#popup_select_first = 0
+" If one does not want the jedi completion but still enable other features
+"let g:jedi#completions_enabled = 0
+
 
 "}}}
 
