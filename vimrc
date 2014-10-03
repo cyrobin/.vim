@@ -219,16 +219,17 @@ au FileType python setlocal expandtab " (et) expand tabs to spaces (use :retab t
 
 au BufRead,BufNewFile *.ecl     set syntax=prolog
 au BufRead,BufNewFile *.ins     set textwidth=0
-au BufNewFile,BufRead *.ins     setlocal syntax=tex
+au BufRead,BufNewFile *.ins     setlocal syntax=tex
 au BufRead,BufNewFile *.ability set syntax=c
 au BufRead,BufNewFile *.task    set syntax=c
 au BufRead,BufNewFile *.zsh-theme    set syntax=zsh
 
 au BufRead,BufNewFile *.md      set syntax=rst
-au BufNewFile,BufRead *.rst     so $VIMRUNTIME/syntax/rst.vim
-au BufNewFile,BufRead *.rst,*.tex call ToggleSpell("en_gb")
+au BufRead,BufNewFile *.rst     so $VIMRUNTIME/syntax/rst.vim
+au BufRead,BufNewFile *.md      so $VIMRUNTIME/syntax/rst.vim
+au BufRead,BufNewFile *.rst,*.md,*.tex call ToggleSpell("en_gb")
 
-au BufNewFile,BufRead *.mod,*.data setlocal syntax=gmpl
+au BufRead,BufNewFile *.mod,*.data setlocal syntax=gmpl
 
 au FileType c,h,java,js setlocal mps+==:;   " allow the match pairs operation (%) to work with '=' and ';'
 au FileType c,h         setlocal cindent    " enable the intelligent cindent (cin) feature for the following files
@@ -336,16 +337,13 @@ let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 "}}}
 
 """"""""""""""""""""{{{ ABBREVIATIONS
-:autocmd FileType python     :iabbrev <buffer> iff if:<left>
 
+:autocmd FileType python     :iabbrev <buffer> iff if:<left>
 :autocmd FileType c          :iabbrev <buffer> #i #include
 :autocmd FileType c          :iabbrev <buffer> #d #define
-
 :autocmd FileType html       :iabbrev <buffer> <a <a href=""></a><left><left><left><left><left>
 :autocmd FileType html       :iabbrev <buffer> <i <img src="" /><left><left><left>
-
 :autocmd FileType php        :iabbrev <buffer> <i <img src="" /><left><left><left>
-
 :autocmd FileType javascript :iabbrev <buffer> <? <?php?><left><left>
 
 "}}}
