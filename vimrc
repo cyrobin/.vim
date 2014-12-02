@@ -111,8 +111,8 @@ set suffixes+=.old
 set shell=zsh                               " use zsh as the default shell for :! cmd
 "set shellcmdflag=-ci                       " load zshrc (interactive shell)
 "set foldmethod=marker                       " use marker to define folds
-"set foldmethod=indent                       " use indentation to define folds -- related to tabvalue.
-set foldmethod=syntax                       " use syntax to define folds
+set foldmethod=indent                       " use indentation to define folds -- related to tabvalue.
+"set foldmethod=syntax                       " use syntax to define folds
 
 "}}}
 
