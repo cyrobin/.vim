@@ -65,7 +65,7 @@ set incsearch                               " incremental search (jump to partia
 "set showmatch                              " show matching brackets -- no use with matchit plugin
 set history=50                              " keep some history
 set undolevels=100                          " keep some memory for undo
-set textwidth=80                            " usual textwidth for wrapping
+"set textwidth=80                            " usual textwidth for wrapping
 set scrolloff=12                            " keep at least this many lines above/below cursor
 set sidescrolloff=8                         " keep at least this many columns left/right of cursor
 set title                                   " set the title of the terminal
