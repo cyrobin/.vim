@@ -129,7 +129,7 @@ nmap <leader>c! :set cursorline!<cr>
 nmap <leader>c? :set cursorcolumn!<cr>
 
 " Toggle Paste mode
-set pastetoggle=<leader>p
+set pastetoggle=<F2>
 
 " In visual mode, replace block
 cmap <C-g> <C-u><ESC>
@@ -281,7 +281,7 @@ map .r <Plug>(easymotion-lineforward)
 
 "}}}
 
-""""""""""""""""""""{{{ COMMAND REFERENCES
+""""""""""""""""""""{{{ OTHER COMMAND REFERENCES
 
 " *                     - searches for word under cursor
 " gd                    - finds definition of variable/function under cursor
