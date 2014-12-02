@@ -215,7 +215,7 @@ au FileType tex                 set softtabstop=2
 au FileType python              set shiftwidth=4
 au FileType python              set tabstop=4
 au FileType python              set softtabstop=4
-au FileType python setlocal expandtab " (et) expand tabs to spaces (use :retab to redo entire file)
+au FileType python              setlocal expandtab " (et) expand tabs to spaces (use :retab to redo entire file)
 
 au BufRead,BufNewFile *.ecl     set syntax=prolog
 au BufRead,BufNewFile *.ins     set textwidth=0
@@ -242,10 +242,6 @@ autocmd BufReadPost *
           \   exe "normal g`\"" |
   \ endif
 
-"Completion
-au FileType python let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
-au FileType python let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-
 "au FileType python          setlocal omnifunc=pythoncomplete#Complete
 au FileType python          setlocal omnifunc=jedi#completions
 au Filetype html,markdown   setlocal omnifunc=htmlcomplete#CompleteTags
@@ -271,11 +267,15 @@ function! DeleteTrailingWS()
 endfunc
 
 " Delete trailing white space on save for some specific files
-autocmd FileType c,cpp,python,prolog,tex autocmd BufWrite :call DeleteTrailingWS()
+au FileType c,cpp,python,prolog,tex au BufWrite * :call DeleteTrailingWS()
 
 "}}}
 
 """"""""""""""""""""{{{ VIM MODES DISPLAY and SETTINGS
+
+" Highlight long lines
+"au FileType python,c let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+au FileType python,c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " Adapt the color and shape of the cursor depending on the vim current mode
 " Cursor Color -- for compatible terminal
@@ -488,15 +488,15 @@ inoremap <expr><TAB>  pumvisible() ? neocomplete#close_popup() : "\<TAB>"
 "let g:jedi#auto_vim_configuration = 1
 "let g:jedi#use_tabs_not_buffers = 1
 "let g:jedi#use_splits_not_buffers = "left"
-"This options could be "left", "right", "top" or "bottom". It will decide the direction where the split open.
-"
-"Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
-"let g:jedi#popup_on_dot = 0
-" 'light' popup display (disable function call signature)
+""This options could be "left", "right", "top" or "bottom". It will decide the direction where the split open.
+
+""Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
+let g:jedi#popup_on_dot = 0
+"" 'light' popup display (disable function call signature)
 "let g:jedi#show_call_signatures = "0"
-"Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
+""Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
 "let g:jedi#popup_select_first = 0
-" If one does not want the jedi completion but still enable other features
+"" If one does not want the jedi completion but still enable other features
 "let g:jedi#completions_enabled = 0
 
 
@@ -506,7 +506,7 @@ inoremap <expr><TAB>  pumvisible() ? neocomplete#close_popup() : "\<TAB>"
 " Default (choose one, comment other)
 source ~/.vim/vimrc.bepo
 au filetype rst execute "source ~/.vim/alias/bepo/rst.vim"
-au filetype tex execute "source ~/.vim/alias/bebo/tex.vim"
+au filetype tex execute "source ~/.vim/alias/bepo/tex.vim"
 
 "source ~/.vim/vimrc.qwerty
 "au filetype rst execute "source ~/.vim/alias/qwerty/rst.vim"
