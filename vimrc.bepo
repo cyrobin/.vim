@@ -305,6 +305,8 @@ map .r <Plug>(easymotion-lineforward)
 " zg/zw     mark as good/wrong (add)
 " zug/zuw   undo marking
 " zG/zW     mark as good/wrong, for the session
+" ]s / [s   navigation between mispelled word
+" ]S / [S   same as above, without the rare words, etc.
 
 " Native alternative to <ESC> : <CTRL + C >
 
