@@ -8,6 +8,7 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 " colortheme
 Plugin 'tomasr/molokai'
+Plugin 'notpratheek/vim-luna'
 " nice tab and bottom lines
 Plugin 'bling/vim-airline'
 " git and other cvs info in the file
@@ -45,6 +46,9 @@ Plugin 'davidhalter/jedi-vim'
 let mapleader=","                           " define new leader key
 colorscheme molokai                         " a good dark colorscheme
 "color summerfruit256                        " a good light colorscheme
+if &diff                                    " diffmode uses a different colorscheme
+  colorscheme luna-term
+endif
 set gfn=terminus                            " set GUI font
 set go=                                     " set GUI option (none here)
 
@@ -432,10 +436,11 @@ highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=160
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " highlight lines in Signify (Sy) and vimdiff etc.
-" TODO
+" TODO -- - fix molokai on this (open) issue ?
 "highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
 "highlight DiffDelete        cterm=bold ctermbg=none ctermfg=160
 "highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
+"highlight DiffText          cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
 """ NeoComplete
 " Disable AutoComplPop.
